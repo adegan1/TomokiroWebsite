@@ -23,12 +23,12 @@
         <main class="content">
             <section id="home" class="hero">
                 <div class="hero-media" aria-hidden="true">
-                    <video class="hero-clip" src="resources/videos/clip-01.mp4" autoplay muted loop playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-02.mp4" autoplay muted loop playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-03.mp4" autoplay muted loop playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-04.mp4" autoplay muted loop playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-05.mp4" autoplay muted loop playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-06.mp4" autoplay muted loop playsinline></video>
+                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-02.mp4" muted playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline></video>
                 </div>
                 <div class="hero-overlay" aria-hidden="true"></div>
                 <div class="hero-content">
@@ -40,7 +40,7 @@
             <section class="intro">
                 <div class="container">
                     <h2>Hello, I'm Andrew Degan</h2>
-                    <p>A brief introduction about yourself goes here. Describe what you do, your passions, and what makes you unique. This is your chance to make a great first impression!</p>
+                    <p>My brief introduction will go here. Describe what I do, my passions, and what makes me unique.</p>
                 </div>
             </section>
 
@@ -57,11 +57,11 @@
                         <div class="about-grid">
                             <div class="about-text">
                                 <h2>My Story</h2>
-                                <p>Write your background story here. Talk about your journey, how you got started in your field, and what drives you.</p>
-                                <p>Share your experiences, education, and the path that led you to where you are today.</p>
+                                <p>Write my background story here. Talk about my journey, how I got started in my field, and what drives me.</p>
+                                <p>Share my experiences, education, and the path that led me to where I am today.</p>
                                 
                                 <h2>What I Do</h2>
-                                <p>Describe your current work, projects, or areas of focus. What are you passionate about?</p>
+                                <p>Describe my current work, projects, or areas of focus. What am I passionate about?</p>
                                 
                                 <h2>My Values</h2>
                                 <ul>
@@ -72,7 +72,12 @@
                                 </ul>
                             </div>
                             <div class="about-image">
-                                <div class="placeholder-image">Your Photo Here</div>
+                                <div class="about-slideshow">
+                                    <img src="resources/images/about-01.png" alt="Andrew Degan photo 1" class="about-slide active">
+                                    <img src="resources/images/about-02.png" alt="Andrew Degan photo 2" class="about-slide">
+                                    <img src="resources/images/about-03.png" alt="Andrew Degan photo 3" class="about-slide">
+                                    <img src="resources/images/about-04.png" alt="Andrew Degan photo 4" class="about-slide">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -330,5 +335,38 @@
             </footer>
         </main>
     </div>
+
+    <script>
+        // Hero video playlist
+        const heroVideos = document.querySelectorAll('.hero-clip');
+        let currentVideo = 0;
+
+        heroVideos[currentVideo].play();
+
+        heroVideos.forEach((video, index) => {
+            video.addEventListener('timeupdate', () => {
+                if (video.currentTime >= 8 && video.classList.contains('active')) {
+                    video.classList.remove('active');
+                    const nextVideo = (currentVideo + 1) % heroVideos.length;
+                    heroVideos[nextVideo].classList.add('active');
+                    heroVideos[nextVideo].currentTime = 0;
+                    heroVideos[nextVideo].play();
+                    currentVideo = nextVideo;
+                }
+            });
+        });
+
+        // About image slideshow
+        const slides = document.querySelectorAll('.about-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 9000);
+    </script>
 </body>
 </html>

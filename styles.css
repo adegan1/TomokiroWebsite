@@ -41,7 +41,7 @@ h3 {
 
 /* Navigation */
 nav {
-    background-color: var(--bg-color);
+    background: linear-gradient(135deg, #561cdb 0%, #9051d3 100%);
     box-shadow: var(--shadow);
     position: fixed;
     top: 0;
@@ -70,14 +70,16 @@ nav {
 .nav-links a {
     display: block;
     text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s;
+    color: white;
+    font-size: 2.4rem;
+    font-weight: 400;
+    transition: all 0.3s;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: var(--primary-color);
+    color: #ffda62;
+    font-weight: 1000;
 }
 
 /* Layout */
@@ -114,7 +116,7 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, rgba(41, 41, 41, 0.08), rgba(170, 170, 170, 0.06));
     color: white;
     padding: 8rem 2rem;
     min-height: 100vh;
@@ -128,27 +130,39 @@ nav {
 .hero-media {
     position: absolute;
     inset: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
-    padding: 1.5rem;
-    opacity: 0.85;
 }
 
 .hero-clip {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0.75rem;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
     filter: saturate(0.9) contrast(1.05);
+}
+
+.hero-clip.active {
+    opacity: 0.85;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, rgba(15, 23, 42, 0.6), rgba(37, 99, 235, 0.3));
-    backdrop-filter: blur(2px);
+    background: 
+        linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.18) 0%, 
+            rgba(255, 255, 255, 0.22) 48%, 
+            rgba(255, 255, 255, 0.26) 50%, 
+            rgba(255, 255, 255, 0.22) 52%, 
+            transparent 60%),
+        linear-gradient(120deg, rgba(53, 53, 53, 0.65), rgba(122, 122, 122, 0.35));
+    backdrop-filter: blur(3px);
+    box-shadow: 
+        inset 0 2px 12px rgba(255, 255, 255, 0.2), 
+        inset -2px -2px 16px rgba(0, 0, 0, 0.15);
 }
 
 .hero-content h1 {
@@ -163,17 +177,17 @@ nav {
 }
 
 .name-tag-image {
-    width: min(25vw, 420px);
+    width: min(45vw, 750px);
     max-width: 90%;
     height: auto;
     margin: 0 auto 2.5rem;
     display: block;
-    transform: rotate(-4deg);
+    transform: rotate(6deg);
     filter: drop-shadow(0 14px 28px rgba(15, 23, 42, 0.35));
 }
 
 .tagline {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     margin-bottom: 2rem;
     opacity: 0.9;
 }
@@ -285,6 +299,31 @@ nav {
 .about-text ul {
     margin-left: 1.5rem;
     color: var(--text-light);
+}
+
+.about-slideshow {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 83.33%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.about-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.about-slide.active {
+    opacity: 1;
 }
 
 .placeholder-image {
