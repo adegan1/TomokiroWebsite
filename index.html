@@ -7,41 +7,328 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Andrew Degan</div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="page">
+        <nav class="side-nav">
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome to My Personal Website</h1>
-                <p class="tagline">Designer • Developer • Creator</p>
-                <div class="cta-buttons">
-                    <a href="portfolio.html" class="btn btn-primary">View My Work</a>
-                    <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+        <main class="content">
+            <section id="home" class="hero">
+                <div class="hero-media" aria-hidden="true">
+                    <video class="hero-clip" src="resources/videos/clip-01.mp4" autoplay muted loop playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-02.mp4" autoplay muted loop playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-03.mp4" autoplay muted loop playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-04.mp4" autoplay muted loop playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-05.mp4" autoplay muted loop playsinline></video>
+                    <video class="hero-clip" src="resources/videos/clip-06.mp4" autoplay muted loop playsinline></video>
                 </div>
-            </div>
-        </section>
+                <div class="hero-overlay" aria-hidden="true"></div>
+                <div class="hero-content">
+                    <img class="name-tag-image" src="resources/images/nametag.png" alt="Hello, my name is Andrew Degan">
+                    <p class="tagline">Designer • Developer • Creator</p>
+                </div>
+            </section>
 
-        <section class="intro">
-            <div class="container">
-                <h2>Hello, I'm Andrew Degan</h2>
-                <p>A brief introduction about yourself goes here. Describe what you do, your passions, and what makes you unique. This is your chance to make a great first impression!</p>
-            </div>
-        </section>
-    </main>
+            <section class="intro">
+                <div class="container">
+                    <h2>Hello, I'm Andrew Degan</h2>
+                    <p>A brief introduction about yourself goes here. Describe what you do, your passions, and what makes you unique. This is your chance to make a great first impression!</p>
+                </div>
+            </section>
 
-    <footer>
-        <p>&copy; 2026 Andrew Degan. All rights reserved.</p>
-    </footer>
+            <section id="about" class="section-block">
+                <div class="page-header">
+                    <div class="container">
+                        <h1>About Me</h1>
+                        <p class="subtitle">Get to know me better</p>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <div class="container">
+                        <div class="about-grid">
+                            <div class="about-text">
+                                <h2>My Story</h2>
+                                <p>Write your background story here. Talk about your journey, how you got started in your field, and what drives you.</p>
+                                <p>Share your experiences, education, and the path that led you to where you are today.</p>
+                                
+                                <h2>What I Do</h2>
+                                <p>Describe your current work, projects, or areas of focus. What are you passionate about?</p>
+                                
+                                <h2>My Values</h2>
+                                <ul>
+                                    <li>Innovation and creativity</li>
+                                    <li>Continuous learning</li>
+                                    <li>Collaboration and teamwork</li>
+                                    <li>Excellence in execution</li>
+                                </ul>
+                            </div>
+                            <div class="about-image">
+                                <div class="placeholder-image">Your Photo Here</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills">
+                    <div class="container">
+                        <h2>Skills & Expertise</h2>
+                        <div class="skills-grid">
+                            <div class="skill-card">
+                                <h3>Design</h3>
+                                <p>UI/UX, Graphic Design, Branding</p>
+                            </div>
+                            <div class="skill-card">
+                                <h3>Development</h3>
+                                <p>HTML, CSS, JavaScript, Python</p>
+                            </div>
+                            <div class="skill-card">
+                                <h3>Tools</h3>
+                                <p>Figma, Adobe Suite, VS Code, Git</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="portfolio" class="section-block">
+                <div class="page-header">
+                    <div class="container">
+                        <h1>My Portfolio</h1>
+                        <p class="subtitle">Showcasing my best work</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-content">
+                    <div class="container">
+                        <div class="portfolio-grid">
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <div class="placeholder-image">Project Image 1</div>
+                                </div>
+                                <div class="project-info">
+                                    <h3>Project Title 1</h3>
+                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <div class="project-tags">
+                                        <span class="tag">HTML</span>
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">JavaScript</span>
+                                    </div>
+                                    <a href="#" class="project-link">View Project →</a>
+                                </div>
+                            </div>
+
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <div class="placeholder-image">Project Image 2</div>
+                                </div>
+                                <div class="project-info">
+                                    <h3>Project Title 2</h3>
+                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <div class="project-tags">
+                                        <span class="tag">React</span>
+                                        <span class="tag">Node.js</span>
+                                        <span class="tag">MongoDB</span>
+                                    </div>
+                                    <a href="#" class="project-link">View Project →</a>
+                                </div>
+                            </div>
+
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <div class="placeholder-image">Project Image 3</div>
+                                </div>
+                                <div class="project-info">
+                                    <h3>Project Title 3</h3>
+                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Python</span>
+                                        <span class="tag">Django</span>
+                                        <span class="tag">PostgreSQL</span>
+                                    </div>
+                                    <a href="#" class="project-link">View Project →</a>
+                                </div>
+                            </div>
+
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <div class="placeholder-image">Project Image 4</div>
+                                </div>
+                                <div class="project-info">
+                                    <h3>Project Title 4</h3>
+                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Design</span>
+                                        <span class="tag">Figma</span>
+                                        <span class="tag">UI/UX</span>
+                                    </div>
+                                    <a href="#" class="project-link">View Project →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resume" class="section-block">
+                <div class="page-header">
+                    <div class="container">
+                        <h1>Resume</h1>
+                        <p class="subtitle">My professional experience and education</p>
+                        <a href="#" class="btn btn-primary">Download PDF</a>
+                    </div>
+                </div>
+
+                <div class="resume-content">
+                    <div class="container">
+                        <div class="resume-section">
+                            <h2>Experience</h2>
+                            <div class="resume-item">
+                                <div class="resume-header">
+                                    <h3>Job Title</h3>
+                                    <span class="date">Start Date - End Date</span>
+                                </div>
+                                <h4>Company Name</h4>
+                                <ul>
+                                    <li>Key achievement or responsibility</li>
+                                    <li>Another important accomplishment</li>
+                                    <li>Major project or initiative you led</li>
+                                </ul>
+                            </div>
+
+                            <div class="resume-item">
+                                <div class="resume-header">
+                                    <h3>Previous Job Title</h3>
+                                    <span class="date">Start Date - End Date</span>
+                                </div>
+                                <h4>Previous Company Name</h4>
+                                <ul>
+                                    <li>Key achievement or responsibility</li>
+                                    <li>Another important accomplishment</li>
+                                    <li>Major project or initiative you led</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="resume-section">
+                            <h2>Education</h2>
+                            <div class="resume-item">
+                                <div class="resume-header">
+                                    <h3>Degree Name</h3>
+                                    <span class="date">Graduation Year</span>
+                                </div>
+                                <h4>University Name</h4>
+                                <p>Relevant coursework, honors, or achievements</p>
+                            </div>
+                        </div>
+
+                        <div class="resume-section">
+                            <h2>Skills</h2>
+                            <div class="skills-list">
+                                <div class="skill-category">
+                                    <h3>Technical Skills</h3>
+                                    <p>HTML, CSS, JavaScript, Python, React, Node.js, Git, SQL</p>
+                                </div>
+                                <div class="skill-category">
+                                    <h3>Design Skills</h3>
+                                    <p>Figma, Adobe Creative Suite, UI/UX Design, Wireframing, Prototyping</p>
+                                </div>
+                                <div class="skill-category">
+                                    <h3>Soft Skills</h3>
+                                    <p>Leadership, Communication, Problem-solving, Team Collaboration</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resume-section">
+                            <h2>Certifications</h2>
+                            <div class="resume-item">
+                                <div class="resume-header">
+                                    <h3>Certification Name</h3>
+                                    <span class="date">Year</span>
+                                </div>
+                                <h4>Issuing Organization</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section-block">
+                <div class="page-header">
+                    <div class="container">
+                        <h1>Get in Touch</h1>
+                        <p class="subtitle">I'd love to hear from you</p>
+                    </div>
+                </div>
+
+                <div class="contact-content">
+                    <div class="container">
+                        <div class="contact-grid">
+                            <div class="contact-info">
+                                <h2>Contact Information</h2>
+                                <div class="contact-item">
+                                    <h3>Email</h3>
+                                    <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                                </div>
+                                <div class="contact-item">
+                                    <h3>Phone</h3>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                                <div class="contact-item">
+                                    <h3>Location</h3>
+                                    <p>City, State, Country</p>
+                                </div>
+                                <div class="contact-item">
+                                    <h3>Social Media</h3>
+                                    <div class="social-links">
+                                        <a href="#" target="_blank">LinkedIn</a>
+                                        <a href="#" target="_blank">GitHub</a>
+                                        <a href="#" target="_blank">Twitter</a>
+                                        <a href="#" target="_blank">Instagram</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-form">
+                                <h2>Send Me a Message</h2>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" id="subject" name="subject" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" name="message" rows="5" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2026 Andrew Degan. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
 </body>
 </html>
