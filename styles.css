@@ -165,6 +165,35 @@ nav {
         inset -2px -2px 16px rgba(0, 0, 0, 0.15);
 }
 
+.video-pause-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.video-pause-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.video-pause-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -269,9 +298,59 @@ nav {
     margin-bottom: 1.5rem;
 }
 
+/* Manila Folder Styling */
+#about,
+#portfolio,
+#contact {
+    position: relative;
+    background-color: #f3e8d9;
+    border-top: 4px solid rgba(86, 28, 219, 0.3);
+}
+
+#about::before,
+#portfolio::before,
+#contact::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    height: 80px;
+    width: 300px;
+    background: #f3e8d9;
+    border-top: 4px solid rgba(86, 28, 219, 0.3);
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #561cdb;
+    font-family: 'Fraunces', serif;
+}
+
+#about::before {
+    content: 'About';
+    left: 10rem;
+}
+
+#portfolio::before {
+    content: 'Portfolio';
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contact::before {
+    content: 'Contact';
+    right: 10rem;
+}
+
 /* About Section */
 .about-content {
     padding: 4rem 0;
+}
+
+#about .page-header {
+    background: transparent;
+    padding: 3rem 0 2rem 0;
 }
 
 .about-grid {
@@ -279,6 +358,7 @@ nav {
     grid-template-columns: 2fr 1fr;
     gap: 3rem;
     align-items: start;
+    position: relative;
 }
 
 .about-text h2 {
@@ -324,6 +404,36 @@ nav {
 
 .about-slide.active {
     opacity: 1;
+}
+
+.open-resume-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 0.5rem;
+    background: rgba(86, 28, 219, 0.2);
+    border: 1px solid rgba(86, 28, 219, 0.4);
+    color: #561cdb;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.open-resume-btn:hover {
+    background: rgba(86, 28, 219, 0.35);
+    border-color: rgba(86, 28, 219, 0.6);
+    transform: translateY(-2px);
+}
+
+.open-resume-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
 }
 
 .placeholder-image {
@@ -375,6 +485,11 @@ nav {
     padding: 4rem 0;
 }
 
+#portfolio .page-header {
+    background: transparent;
+    padding: 3rem 0 2rem 0;
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -386,12 +501,36 @@ nav {
     border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: var(--shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    border: 4px solid transparent;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
+    border: 4px solid rgba(86, 28, 219, 0.3);
+}
+
+.project-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.project-img.active {
+    opacity: 1;
 }
 
 .project-image .placeholder-image {
@@ -508,6 +647,11 @@ nav {
 /* Contact Section */
 .contact-content {
     padding: 4rem 0;
+}
+
+#contact .page-header {
+    background: transparent;
+    padding: 3rem 0 2rem 0;
 }
 
 .contact-grid {
