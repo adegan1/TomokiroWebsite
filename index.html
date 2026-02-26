@@ -19,6 +19,10 @@
             </div>
         </nav>
 
+        <div class="top-name-bar" id="topNameBar">
+            <span>Andrew Degan</span>
+        </div>
+
         <main class="content">
             <section id="home" class="hero">
                 <div class="hero-media" aria-hidden="true">
@@ -298,6 +302,24 @@
         }, observerOptions);
 
         sections.forEach(section => observer.observe(section));
+
+        const topNameBar = document.getElementById('topNameBar');
+        const aboutSection = document.getElementById('about');
+        const heroSection = document.getElementById('home');
+
+        const topBarObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    topNameBar.classList.remove('is-visible');
+                    aboutSection.classList.remove('visible');
+                } else {
+                    topNameBar.classList.add('is-visible');
+                    aboutSection.classList.add('visible');
+                }
+            });
+        }, { threshold: 0, rootMargin: '-900px 0px 0px 0px' });
+
+        topBarObserver.observe(heroSection);
 
         // Hero video playlist
         const heroVideos = document.querySelectorAll('.hero-clip');

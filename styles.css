@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&display=swap');
 
+@font-face {
+    font-family: 'Rage Italic';
+    src: url('resources/RAGE_1.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -8,15 +16,26 @@
 }
 
 :root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
+    --primary-color: #561cdb;
+    --nav-active: #ffda62;
     --text-color: #1f2937;
     --text-light: #6b7280;
     --bg-color: #ffffff;
-    --bg-light: #f9fafb;
+    --bg-light: #f7f5f0;
     --border-color: #e5e7eb;
     --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Section colors */
+    --about-color: #63a375;
+    --about-border: #4f825d;
+    --about-dark: #4a7858;
+    --portfolio-color: #d57a66;
+    --portfolio-border: #b36252;
+    --portfolio-dark: #a15c4f;
+    --contact-color: #ca6680;
+    --contact-border: #a6546a;
+    --contact-dark: #964d61;
 }
 
 html {
@@ -27,10 +46,7 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #f7f5f0;
-    background-image:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 40%),
-        radial-gradient(circle at 20% 80%, rgba(30, 64, 175, 0.06), transparent 35%);
+    background: linear-gradient(90deg, #8f4ed4 0%, #25006b 100%);
 }
 
 h1,
@@ -49,6 +65,30 @@ nav {
     height: 100vh;
     width: 220px;
     z-index: 1000;
+}
+
+.top-name-bar {
+    position: fixed;
+    top: 0;
+    left: 220px;
+    width: calc(100% - 220px);
+    height: 56px;
+    background: rgba(243, 232, 217, 0.98);
+    border-bottom: 4px solid rgba(86, 28, 219, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    color: var(--primary-color);
+    transform: translateY(-110%);
+    transition: transform 0.3s ease;
+    z-index: 900;
+}
+
+.top-name-bar.is-visible {
+    transform: translateY(0);
 }
 
 .nav-container {
@@ -78,7 +118,7 @@ nav {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #ffda62;
+    color: var(--nav-active);
     font-weight: 1000;
 }
 
@@ -92,8 +132,10 @@ nav {
     width: calc(100% - 220px);
 }
 
-.section-block {
-    animation: fade-up 0.8s ease both;
+.section-block:not(#about),
+#portfolio.section-block,
+#contact.section-block {
+    animation: fade-up 0.25s ease both;
 }
 
 @keyframes fade-up {
@@ -194,11 +236,6 @@ nav {
     height: 24px;
 }
 
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
 .hero-content {
     position: relative;
     z-index: 2;
@@ -219,13 +256,6 @@ nav {
     font-size: 2.2rem;
     margin-bottom: 2rem;
     opacity: 0.9;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
 }
 
 /* Buttons */
@@ -250,34 +280,9 @@ nav {
     box-shadow: var(--shadow-lg);
 }
 
-.btn-secondary {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-}
-
-.btn-secondary:hover {
-    background-color: white;
-    color: var(--primary-color);
-}
-
 /* Intro Section */
 .intro {
-    padding: 4rem 0;
-    text-align: center;
-}
-
-.intro h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-}
-
-.intro p {
-    font-size: 1.125rem;
-    color: var(--text-light);
-    max-width: 800px;
-    margin: 0 auto;
+    display: none;
 }
 
 /* Page Header */
@@ -290,6 +295,9 @@ nav {
 .page-header h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    display: inline-block;
 }
 
 .subtitle {
@@ -298,13 +306,31 @@ nav {
     margin-bottom: 1.5rem;
 }
 
+/* Folder crease line */
+#about .page-header::after,
+#portfolio .page-header::after,
+#contact .page-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+#about .page-header,
+#portfolio .page-header,
+#contact .page-header {
+    position: relative;
+}
+
 /* Manila Folder Styling */
 #about,
 #portfolio,
 #contact {
     position: relative;
-    background-color: #f3e8d9;
-    border-top: 4px solid rgba(86, 28, 219, 0.3);
 }
 
 #about::before,
@@ -315,16 +341,92 @@ nav {
     top: -70px;
     height: 80px;
     width: 300px;
-    background: #f3e8d9;
-    border-top: 4px solid rgba(86, 28, 219, 0.3);
     border-radius: 12px 12px 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #561cdb;
-    font-family: 'Fraunces', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-family: 'Rage Italic', 'Fraunces', serif;
+    color: #000;
+}
+
+#about {
+    background: linear-gradient(to bottom, 
+        var(--about-color) 0%, 
+        var(--about-color) 50%, 
+        var(--about-dark) 100%);
+    border-top: 4px solid var(--about-border);
+    transform: translateY(7.5vh);
+    transition: transform 0.5s ease;
+}
+
+#about.visible {
+    transform: translateY(0);
+}
+
+#about::before {
+    background: var(--about-color);
+    border-top: 4px solid var(--about-border);
+}
+
+#portfolio {
+    background: linear-gradient(to bottom, 
+        var(--portfolio-color) 0%, 
+        var(--portfolio-color) 50%, 
+        var(--portfolio-dark) 100%);
+    border-top: 4px solid var(--portfolio-border);
+    padding-bottom: 3rem;
+}
+
+#portfolio::before {
+    background: var(--portfolio-color);
+    border-top: 4px solid var(--portfolio-border);
+}
+
+#contact {
+    background: linear-gradient(to bottom, 
+        var(--contact-color) 0%, 
+        var(--contact-color) 50%, 
+        var(--contact-dark) 100%);
+    border-top: 4px solid var(--contact-border);
+}
+
+#contact::before {
+    background: var(--contact-color);
+    border-top: 4px solid var(--contact-border);
+}
+
+#about,
+#portfolio,
+#contact,
+#about .subtitle,
+#portfolio .subtitle,
+#contact .subtitle,
+#about .about-text p,
+#about .about-text ul,
+#about .about-text li,
+#contact .contact-item p,
+#contact .contact-item a,
+#contact .contact-form label,
+#contact .contact-item h3,
+#contact .contact-info h2,
+#contact .contact-form h2 {
+    color: white;
+}
+
+/* Portfolio project text on white cards should be black */
+#portfolio .project-info p,
+#portfolio .tag,
+#portfolio .project-info h3 {
+    color: var(--text-color);
+}
+
+/* Make body text slightly dimmer than headings for hierarchy */
+#about .about-text p,
+#about .about-text li,
+#contact .contact-item p {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 #about::before {
@@ -350,7 +452,7 @@ nav {
 
 #about .page-header {
     background: transparent;
-    padding: 3rem 0 2rem 0;
+    padding: 1rem 0 0.5rem 0;
 }
 
 .about-grid {
@@ -408,14 +510,14 @@ nav {
 
 .open-resume-btn {
     position: absolute;
-    bottom: 0;
+    top: calc(70%);
     right: 0;
     width: 48px;
     height: 48px;
     border-radius: 0.5rem;
-    background: rgba(86, 28, 219, 0.2);
-    border: 1px solid rgba(86, 28, 219, 0.4);
-    color: #561cdb;
+    background: rgba(147, 196, 160, 0.2);
+    border: 2px solid rgba(177, 241, 196, 0.4);
+    color: rgba(255, 255, 255, 0.774);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -424,9 +526,23 @@ nav {
     backdrop-filter: blur(8px);
 }
 
+.open-resume-btn::before {
+    content: 'Open Resume';
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
 .open-resume-btn:hover {
-    background: rgba(86, 28, 219, 0.35);
-    border-color: rgba(86, 28, 219, 0.6);
+    background: rgba(218, 218, 218, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6);
     transform: translateY(-2px);
 }
 
@@ -436,24 +552,16 @@ nav {
     stroke: currentColor;
 }
 
-.placeholder-image {
-    background-color: var(--border-color);
-    padding: 8rem 2rem;
-    border-radius: 0.5rem;
-    text-align: center;
-    color: var(--text-light);
-}
-
 /* Skills Section */
 .skills {
-    padding: 4rem 0;
-    background-color: var(--bg-light);
+    padding: 0 0 6.5rem 0;
 }
 
 .skills h2 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 2rem;
+    color: white;
 }
 
 .skills-grid {
@@ -487,7 +595,7 @@ nav {
 
 #portfolio .page-header {
     background: transparent;
-    padding: 3rem 0 2rem 0;
+    padding: 2rem 0 1.5rem 0;
 }
 
 .portfolio-grid {
@@ -508,7 +616,7 @@ nav {
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border: 4px solid rgba(86, 28, 219, 0.3);
+    border: 4px solid var(--primary-color);
 }
 
 .project-image {
@@ -531,10 +639,6 @@ nav {
 
 .project-img.active {
     opacity: 1;
-}
-
-.project-image .placeholder-image {
-    padding: 4rem 2rem;
 }
 
 .project-info {
@@ -576,74 +680,6 @@ nav {
     text-decoration: underline;
 }
 
-/* Resume Section */
-.resume-content {
-    padding: 4rem 0;
-}
-
-.resume-section {
-    margin-bottom: 3rem;
-}
-
-.resume-section h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--primary-color);
-}
-
-.resume-item {
-    margin-bottom: 2rem;
-}
-
-.resume-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.resume-header h3 {
-    font-size: 1.25rem;
-    color: var(--text-color);
-}
-
-.date {
-    color: var(--text-light);
-    font-style: italic;
-}
-
-.resume-item h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.resume-item ul {
-    margin-left: 1.5rem;
-    color: var(--text-light);
-}
-
-.resume-item li {
-    margin-bottom: 0.5rem;
-}
-
-.skills-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.skill-category h3 {
-    font-size: 1.125rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.skill-category p {
-    color: var(--text-light);
-}
-
 /* Contact Section */
 .contact-content {
     padding: 4rem 0;
@@ -651,7 +687,7 @@ nav {
 
 #contact .page-header {
     background: transparent;
-    padding: 3rem 0 2rem 0;
+    padding: 2rem 0 1.5rem 0;
 }
 
 .contact-grid {
@@ -738,6 +774,11 @@ footer {
         width: 100%;
     }
 
+    .top-name-bar {
+        left: 0;
+        width: 100%;
+    }
+
     .nav-container {
         padding: 1rem 1.5rem;
     }
@@ -756,9 +797,7 @@ footer {
     .page {
         flex-direction: column;
     }
-}
 
-@media (max-width: 900px) {
     .hero-media {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-template-rows: repeat(3, minmax(0, 1fr));
