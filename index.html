@@ -20,7 +20,12 @@
         </nav>
 
         <div class="top-name-bar" id="topNameBar">
-            <span>Andrew Degan</span>
+            <span>・　Andrew Degan　・</span>
+            <a href="#home" class="scroll-to-top" aria-label="Scroll to top">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </a>
         </div>
 
         <main class="content">
@@ -38,6 +43,17 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="6" y="4" width="4" height="16"></rect>
                         <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                </button>
+                <button class="video-pause-btn" id="toggleContentBtn" aria-label="Toggle hero content visibility" style="top: calc(2rem + 48px + 1rem);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+                <button class="video-pause-btn" id="videoRestartBtn" aria-label="Restart video playlist" style="top: calc(2rem + 96px + 2rem);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
                     </svg>
                 </button>
                 <div class="hero-content">
@@ -139,7 +155,7 @@
                                 </div>
                                 <div class="project-info">
                                     <h3>Project Title 1</h3>
-                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <p>Brief description of the project. What was the goal? What technologies did I use?</p>
                                     <div class="project-tags">
                                         <span class="tag">HTML</span>
                                         <span class="tag">CSS</span>
@@ -157,7 +173,7 @@
                                 </div>
                                 <div class="project-info">
                                     <h3>Project Title 2</h3>
-                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <p>Brief description of the project. What was the goal? What technologies did I use?</p>
                                     <div class="project-tags">
                                         <span class="tag">React</span>
                                         <span class="tag">Node.js</span>
@@ -175,7 +191,7 @@
                                 </div>
                                 <div class="project-info">
                                     <h3>Project Title 3</h3>
-                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
+                                    <p>Brief description of the project. What was the goal? What technologies did I use?</p>
                                     <div class="project-tags">
                                         <span class="tag">Python</span>
                                         <span class="tag">Django</span>
@@ -185,21 +201,122 @@
                                 </div>
                             </div>
 
-                            <div class="project-card">
-                                <div class="project-image">
-                                    <img src="resources/images/project-4-img-1.png" alt="Project 4 Image 1" class="project-img active">
-                                    <img src="resources/images/project-4-img-2.png" alt="Project 4 Image 2" class="project-img">
-                                    <img src="resources/images/project-4-img-3.png" alt="Project 4 Image 3" class="project-img">
-                                </div>
-                                <div class="project-info">
-                                    <h3>Project Title 4</h3>
-                                    <p>Brief description of your project. What was the goal? What technologies did you use?</p>
-                                    <div class="project-tags">
-                                        <span class="tag">Design</span>
-                                        <span class="tag">Figma</span>
-                                        <span class="tag">UI/UX</span>
+                            <div class="more-projects-container">
+                                <button class="toggle-projects-btn" id="toggleProjectsBtn">
+                                    <span class="btn-text">Show More Projects</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="chevron">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                
+                                <div class="additional-projects" id="additionalProjects">
+                                    <div class="project-card">
+                                        <div class="project-image">
+                                            <img src="resources/images/project-4-img-1.png" alt="Project 4 Image 1" class="project-img active">
+                                            <img src="resources/images/project-4-img-2.png" alt="Project 4 Image 2" class="project-img">
+                                            <img src="resources/images/project-4-img-3.png" alt="Project 4 Image 3" class="project-img">
+                                        </div>
+                                        <div class="project-info">
+                                            <h3>Project Title 4</h3>
+                                            <p>Brief description of the project. What was the goal? What technologies did I use?</p>
+                                            <div class="project-tags">
+                                                <span class="tag">Design</span>
+                                                <span class="tag">Figma</span>
+                                                <span class="tag">UI/UX</span>
+                                            </div>
+                                            <a href="#" class="project-link">View Project →</a>
+                                        </div>
                                     </div>
-                                    <a href="#" class="project-link">View Project →</a>
+
+                                    <div class="project-card">
+                                        <div class="project-image">
+                                            <img src="resources/images/project-5-img-1.png" alt="Project 5 Image 1" class="project-img active">
+                                            <img src="resources/images/project-5-img-2.png" alt="Project 5 Image 2" class="project-img">
+                                            <img src="resources/images/project-5-img-3.png" alt="Project 5 Image 3" class="project-img">
+                                        </div>
+                                        <div class="project-info">
+                                            <h3>Project Title 5</h3>
+                                            <p>Brief description of the project. What was the goal? What technologies did I use?</p>
+                                            <div class="project-tags">
+                                                <span class="tag">Vue.js</span>
+                                                <span class="tag">TypeScript</span>
+                                                <span class="tag">Firebase</span>
+                                            </div>
+                                            <a href="#" class="project-link">View Project →</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="project-card">
+                                        <div class="project-image">
+                                            <img src="resources/images/project-6-img-1.png" alt="Project 6 Image 1" class="project-img active">
+                                            <img src="resources/images/project-6-img-2.png" alt="Project 6 Image 2" class="project-img">
+                                            <img src="resources/images/project-6-img-3.png" alt="Project 6 Image 3" class="project-img">
+                                        </div>
+                                        <div class="project-info">
+                                            <h3>Project Title 6</h3>
+                                            <p>Brief description of the project. What was the goal? What technologies did I use?</p>
+                                            <div class="project-tags">
+                                                <span class="tag">Swift</span>
+                                                <span class="tag">iOS</span>
+                                                <span class="tag">CoreData</span>
+                                            </div>
+                                            <a href="#" class="project-link">View Project →</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="project-card">
+                                        <div class="project-image">
+                                            <img src="resources/images/project-7-img-1.png" alt="Project 7 Image 1" class="project-img active">
+                                            <img src="resources/images/project-7-img-2.png" alt="Project 7 Image 2" class="project-img">
+                                            <img src="resources/images/project-7-img-3.png" alt="Project 7 Image 3" class="project-img">
+                                        </div>
+                                        <div class="project-info">
+                                            <h3>Project Title 7</h3>
+                                            <p>Brief description of the project. What was the goal? What technologies did I use?</p>
+                                            <div class="project-tags">
+                                                <span class="tag">Angular</span>
+                                                <span class="tag">RxJS</span>
+                                                <span class="tag">Material UI</span>
+                                            </div>
+                                            <a href="#" class="project-link">View Project →</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="project-card">
+                                        <div class="project-image">
+                                            <img src="resources/images/project-8-img-1.png" alt="Project 8 Image 1" class="project-img active">
+                                            <img src="resources/images/project-8-img-2.png" alt="Project 8 Image 2" class="project-img">
+                                            <img src="resources/images/project-8-img-3.png" alt="Project 8 Image 3" class="project-img">
+                                        </div>
+                                        <div class="project-info">
+                                            <h3>Project Title 8</h3>
+                                            <p>Brief description of the project. What was the goal? What technologies did I use?</p>
+                                            <div class="project-tags">
+                                                <span class="tag">Three.js</span>
+                                                <span class="tag">WebGL</span>
+                                                <span class="tag">GLSL</span>
+                                            </div>
+                                            <a href="#" class="project-link">View Project →</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="project-card">
+                                        <div class="project-image">
+                                            <img src="resources/images/project-9-img-1.png" alt="Project 9 Image 1" class="project-img active">
+                                            <img src="resources/images/project-9-img-2.png" alt="Project 9 Image 2" class="project-img">
+                                            <img src="resources/images/project-9-img-3.png" alt="Project 9 Image 3" class="project-img">
+                                        </div>
+                                        <div class="project-info">
+                                            <h3>Project Title 9</h3>
+                                            <p>Brief description of the project. What was the goal? What technologies did I use?</p>
+                                            <div class="project-tags">
+                                                <span class="tag">Rust</span>
+                                                <span class="tag">WebAssembly</span>
+                                                <span class="tag">Performance</span>
+                                            </div>
+                                            <a href="#" class="project-link">View Project →</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +339,7 @@
                                 <h2>Contact Information</h2>
                                 <div class="contact-item">
                                     <h3>Email</h3>
-                                    <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                                    <p><a href="mailto:andrewdegan100@gmail.com">andrewdegan100@gmail.com</a></p>
                                 </div>
                                 <div class="contact-item">
                                     <h3>Phone</h3>
@@ -303,6 +420,41 @@
 
         sections.forEach(section => observer.observe(section));
 
+        // Custom nav scroll offsets for fixed top bar
+        const navScrollOffsets = {
+            home: 0,
+            about: 110,
+            portfolio: 95,
+            contact: 95
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                const targetHash = link.getAttribute('href');
+                if (!targetHash || !targetHash.startsWith('#')) {
+                    return;
+                }
+
+                const targetSection = document.querySelector(targetHash);
+                if (!targetSection) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const targetId = targetHash.slice(1);
+                const offset = navScrollOffsets[targetId] ?? 90;
+                const targetTop = Math.max(0, targetSection.offsetTop - offset);
+
+                window.scrollTo({
+                    top: targetTop,
+                    behavior: 'smooth'
+                });
+
+                history.replaceState(null, '', targetHash);
+            });
+        });
+
         const topNameBar = document.getElementById('topNameBar');
         const aboutSection = document.getElementById('about');
         const heroSection = document.getElementById('home');
@@ -327,19 +479,40 @@
         let currentVideo = 0;
         let videosPaused = false;
 
-        heroVideos[currentVideo].play();
+        function playCurrentVideo() {
+            const activeVideo = heroVideos[currentVideo];
+            if (!activeVideo) {
+                return;
+            }
+            activeVideo.play().catch(() => {});
+        }
+
+        playCurrentVideo();
+
+        // Page Visibility API to handle tab switching
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Tab is hidden - browser will handle pausing
+            } else {
+                // Tab is visible again - resume if not manually paused
+                if (!videosPaused) {
+                    const activeVideo = heroVideos[currentVideo];
+                    if (activeVideo && activeVideo.paused) {
+                        activeVideo.play().catch(() => {});
+                    }
+                }
+            }
+        });
 
         // Pause button functionality
         pauseBtn.addEventListener('click', () => {
             videosPaused = !videosPaused;
             
-            heroVideos.forEach(video => {
-                if (videosPaused) {
-                    video.pause();
-                } else {
-                    video.play();
-                }
-            });
+            if (videosPaused) {
+                heroVideos.forEach(video => video.pause());
+            } else {
+                playCurrentVideo();
+            }
             
             // Update button icon
             updatePauseButtonIcon();
@@ -360,15 +533,38 @@
             }
         }
 
-        heroVideos.forEach((video, index) => {
+        // Restart video playlist button
+        const restartBtn = document.getElementById('videoRestartBtn');
+        restartBtn.addEventListener('click', () => {
+            // Stop all videos
+            heroVideos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+                video.classList.remove('active');
+            });
+            
+            // Reset to first video
+            currentVideo = 0;
+            heroVideos[0].classList.add('active');
+            playCurrentVideo();
+            
+            // Ensure we're in playing state
+            if (videosPaused) {
+                videosPaused = false;
+                updatePauseButtonIcon();
+            }
+        });
+
+        heroVideos.forEach((video) => {
             video.addEventListener('timeupdate', () => {
                 if (video.currentTime >= 8 && video.classList.contains('active') && !videosPaused) {
+                    video.pause();
                     video.classList.remove('active');
                     const nextVideo = (currentVideo + 1) % heroVideos.length;
                     heroVideos[nextVideo].classList.add('active');
                     heroVideos[nextVideo].currentTime = 0;
-                    heroVideos[nextVideo].play();
                     currentVideo = nextVideo;
+                    playCurrentVideo();
                 }
             });
         });
@@ -400,6 +596,9 @@
             let currentImageIndex = 0;
 
             card.addEventListener('mouseenter', () => {
+                if (cycleInterval) {
+                    return;
+                }
                 // Start cycling through images
                 cycleInterval = setInterval(() => {
                     images[currentImageIndex].classList.remove('active');
@@ -411,10 +610,49 @@
             card.addEventListener('mouseleave', () => {
                 // Stop cycling and return to first image
                 clearInterval(cycleInterval);
+                cycleInterval = null;
                 images[currentImageIndex].classList.remove('active');
                 currentImageIndex = 0;
                 images[currentImageIndex].classList.add('active');
             });
+        });
+
+        // Toggle additional projects
+        const toggleBtn = document.getElementById('toggleProjectsBtn');
+        const additionalProjects = document.getElementById('additionalProjects');
+        
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = additionalProjects.classList.toggle('expanded');
+            toggleBtn.classList.toggle('expanded');
+            
+            const btnText = toggleBtn.querySelector('.btn-text');
+            btnText.textContent = isExpanded ? 'Show Fewer Projects' : 'Show More Projects';
+        });
+
+        // Toggle hero content visibility
+        const toggleContentBtn = document.getElementById('toggleContentBtn');
+        const heroContent = document.querySelector('.hero-content');
+        let contentVisible = true;
+        
+        toggleContentBtn.addEventListener('click', () => {
+            contentVisible = !contentVisible;
+            heroContent.style.opacity = contentVisible ? '1' : '0';
+            heroContent.style.pointerEvents = contentVisible ? 'auto' : 'none';
+            
+            // Update button icon
+            if (contentVisible) {
+                // Show eye icon (visible)
+                toggleContentBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>`;
+            } else {
+                // Show eye-off icon (hidden)
+                toggleContentBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>`;
+            }
         });
     </script>
 </body>
