@@ -49,6 +49,23 @@ body {
     background: linear-gradient(90deg, #8f4ed4 0%, #25006b 100%);
 }
 
+.skip-link {
+    position: absolute;
+    top: -48px;
+    left: 1rem;
+    z-index: 2000;
+    padding: 0.5rem 0.75rem;
+    background: #131a27;
+    color: white;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0.75rem;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 14px;
@@ -138,6 +155,14 @@ nav {
 .scroll-to-top:hover {
     background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #ffda62;
+    outline-offset: 2px;
 }
 
 .nav-container {
@@ -870,6 +895,11 @@ section[id] {
     resize: vertical;
 }
 
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(156, 156, 156, 0.75);
+}
+
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
@@ -932,5 +962,18 @@ footer {
 
     .portfolio-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
     }
 }

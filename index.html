@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
     <div class="page">
-        <nav class="side-nav">
+        <nav class="side-nav" aria-label="Primary">
             <div class="nav-container">
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Home</a></li>
@@ -28,7 +29,7 @@
             </a>
         </div>
 
-        <main class="content">
+        <main class="content" id="mainContent" tabindex="-1">
             <section id="home" class="hero">
                 <div class="hero-media" aria-hidden="true">
                     <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline></video>
@@ -39,19 +40,19 @@
                     <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline></video>
                 </div>
                 <div class="hero-overlay" aria-hidden="true"></div>
-                <button class="video-pause-btn" id="videoPauseBtn" aria-label="Pause video">
+                <button class="video-pause-btn" id="videoPauseBtn" type="button" aria-label="Pause video" aria-pressed="false">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="6" y="4" width="4" height="16"></rect>
                         <rect x="14" y="4" width="4" height="16"></rect>
                     </svg>
                 </button>
-                <button class="video-pause-btn" id="toggleContentBtn" aria-label="Toggle hero content visibility" style="top: calc(2rem + 48px + 1rem);">
+                <button class="video-pause-btn" id="toggleContentBtn" type="button" aria-label="Hide hero text" aria-pressed="false" style="top: calc(2rem + 48px + 1rem);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </button>
-                <button class="video-pause-btn" id="videoRestartBtn" aria-label="Restart video playlist" style="top: calc(2rem + 96px + 2rem);">
+                <button class="video-pause-btn" id="videoRestartBtn" type="button" aria-label="Restart video playlist" style="top: calc(2rem + 96px + 2rem);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
                     </svg>
@@ -104,7 +105,7 @@
                                     <img src="resources/images/about-04.png" alt="Andrew Degan photo 4" class="about-slide">
                                 </div>
                             </div>
-                            <button class="open-resume-btn" id="openResumeBtn" title="Open Resume in new tab">
+                            <button class="open-resume-btn" id="openResumeBtn" type="button" title="Open Resume in new tab" aria-label="Open resume in new tab">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -202,7 +203,7 @@
                             </div>
 
                             <div class="more-projects-container">
-                                <button class="toggle-projects-btn" id="toggleProjectsBtn">
+                                <button class="toggle-projects-btn" id="toggleProjectsBtn" type="button" aria-expanded="false" aria-controls="additionalProjects">
                                     <span class="btn-text">Show More Projects</span>
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="chevron">
                                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -352,32 +353,32 @@
                                 <div class="contact-item">
                                     <h3>Social Media</h3>
                                     <div class="social-links">
-                                        <a href="#" target="_blank">LinkedIn</a>
-                                        <a href="#" target="_blank">GitHub</a>
-                                        <a href="#" target="_blank">Twitter</a>
-                                        <a href="#" target="_blank">Instagram</a>
+                                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile in a new tab">LinkedIn</a>
+                                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile in a new tab">GitHub</a>
+                                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Open Twitter profile in a new tab">Twitter</a>
+                                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Open Instagram profile in a new tab">Instagram</a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="contact-form">
                                 <h2>Send Me a Message</h2>
-                                <form>
+                                <form id="contactForm" aria-label="Contact form">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" id="name" name="name" required>
+                                        <input type="text" id="name" name="name" autocomplete="name" placeholder="Let me know who you are!" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" id="email" name="email" required>
+                                        <input type="email" id="email" name="email" autocomplete="email" placeholder="Where can I reach you?" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="subject">Subject</label>
-                                        <input type="text" id="subject" name="subject" required>
+                                        <input type="text" id="subject" name="subject" autocomplete="on" placeholder="What's this about?" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="message">Message</label>
-                                        <textarea id="message" name="message" rows="5" required></textarea>
+                                        <textarea id="message" name="message" rows="5" placeholder="Share your idea, project, or question here..." required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Send Message</button>
                                 </form>
@@ -428,6 +429,8 @@
             contact: 95
         };
 
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
                 const targetHash = link.getAttribute('href');
@@ -448,7 +451,7 @@
 
                 window.scrollTo({
                     top: targetTop,
-                    behavior: 'smooth'
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
 
                 history.replaceState(null, '', targetHash);
@@ -507,6 +510,8 @@
         // Pause button functionality
         pauseBtn.addEventListener('click', () => {
             videosPaused = !videosPaused;
+            pauseBtn.setAttribute('aria-pressed', String(videosPaused));
+            pauseBtn.setAttribute('aria-label', videosPaused ? 'Play video' : 'Pause video');
             
             if (videosPaused) {
                 heroVideos.forEach(video => video.pause());
@@ -579,7 +584,9 @@
             slides[currentSlide].classList.add('active');
         }
 
-        setInterval(nextSlide, 12000);
+        if (!prefersReducedMotion) {
+            setInterval(nextSlide, 12000);
+        }
 
         // Open resume button
         const openResumeBtn = document.getElementById('openResumeBtn');
@@ -596,6 +603,9 @@
             let currentImageIndex = 0;
 
             card.addEventListener('mouseenter', () => {
+                if (prefersReducedMotion) {
+                    return;
+                }
                 if (cycleInterval) {
                     return;
                 }
@@ -624,6 +634,7 @@
         toggleBtn.addEventListener('click', () => {
             const isExpanded = additionalProjects.classList.toggle('expanded');
             toggleBtn.classList.toggle('expanded');
+            toggleBtn.setAttribute('aria-expanded', String(isExpanded));
             
             const btnText = toggleBtn.querySelector('.btn-text');
             btnText.textContent = isExpanded ? 'Show Fewer Projects' : 'Show More Projects';
@@ -638,6 +649,8 @@
             contentVisible = !contentVisible;
             heroContent.style.opacity = contentVisible ? '1' : '0';
             heroContent.style.pointerEvents = contentVisible ? 'auto' : 'none';
+            toggleContentBtn.setAttribute('aria-pressed', String(!contentVisible));
+            toggleContentBtn.setAttribute('aria-label', contentVisible ? 'Hide hero text' : 'Show hero text');
             
             // Update button icon
             if (contentVisible) {
