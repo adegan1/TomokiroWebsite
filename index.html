@@ -601,7 +601,7 @@
             let currentImageIndex = 0;
 
             card.addEventListener('mouseenter', () => {
-                if (prefersReducedMotion) {
+                if (prefersReducedMotion || images.length <= 1) {
                     return;
                 }
                 if (cycleInterval) {
