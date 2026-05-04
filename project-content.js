@@ -26,7 +26,7 @@ window.projectContent = [
             'resources/images/project-2-img-2.png',
             'resources/images/project-2-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://charlesser.itch.io/balajong'
     },
     {
         id: '3',
@@ -54,7 +54,7 @@ window.projectContent = [
             'resources/images/project-4-img-2.png',
             'resources/images/project-4-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://github.com/adegan1/TreeGen'
     },
     {
         id: '5',
@@ -68,12 +68,12 @@ window.projectContent = [
             'resources/images/project-5-img-2.png',
             'resources/images/project-5-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://pasta-place-productions.itch.io/spellbinding-sweets'
     },
     {
         id: '6',
         name: 'Golf Quest Mini',
-        dates: 'March 2025-April 2025',
+        dates: 'February 2025-March 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Swift', 'iOS', 'CoreData'],
@@ -82,7 +82,7 @@ window.projectContent = [
             'resources/images/project-6-img-2.png',
             'resources/images/project-6-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://adegan1.github.io/Golf-Quest-Mini/'
     },
     {
         id: '7',
@@ -96,7 +96,7 @@ window.projectContent = [
             'resources/images/project-7-img-2.png',
             'resources/images/project-7-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://tomokiro.itch.io/blank-slate'
     },
     {
         id: '8',
@@ -110,7 +110,7 @@ window.projectContent = [
             'resources/images/project-8-img-2.png',
             'resources/images/project-8-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://adegan1.github.io/Pyoko-Pyoko/'
     },
     {
         id: '9',
@@ -124,7 +124,7 @@ window.projectContent = [
             'resources/images/project-9-img-2.png',
             'resources/images/project-9-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://hmmmlo.github.io/deciduous/'
     },
     {
         id: '10',
@@ -138,7 +138,7 @@ window.projectContent = [
             'resources/images/project-10-img-2.png',
             'resources/images/project-10-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://hmmmlo.github.io/reVersed/'
     },
     {
         id: '11',
@@ -152,7 +152,7 @@ window.projectContent = [
             'resources/images/project-11-img-2.png',
             'resources/images/project-11-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://tomokiro.itch.io/parallel-protocol'
     },
     {
         id: '12',
