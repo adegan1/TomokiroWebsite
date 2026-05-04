@@ -17,8 +17,8 @@ window.projectContent = [
     {
         id: '2',
         name: 'Balajong',
-        dates: '2025-10 - 2025-12',
-        members: '4 members - Team Role',
+        dates: 'February 2026-March 2026',
+        members: '4 members - Gameplay Designer, Programmer, Artist',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['React', 'Node.js', 'MongoDB'],
         images: [
@@ -31,8 +31,8 @@ window.projectContent = [
     {
         id: '3',
         name: 'Piece of Mind',
-        dates: '2025-08 - 2025-11',
-        members: '4 members - Team Role',
+        dates: 'November 2023-December 2023',
+        members: '4 members - Lead Programmer, Designer, Sound Engineer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Python', 'Django', 'PostgreSQL'],
         images: [
@@ -45,7 +45,7 @@ window.projectContent = [
     {
         id: '4',
         name: 'Unity Tree Generator',
-        dates: '2025-05 - 2025-07',
+        dates: 'January 2026-February 2026',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Design', 'Figma', 'UI/UX'],
@@ -59,8 +59,8 @@ window.projectContent = [
     {
         id: '5',
         name: 'Spellbinding Sweets',
-        dates: '2025-03 - 2025-04',
-        members: '2 members - Team Role',
+        dates: 'July 2021-August 2021',
+        members: '2 members - Lead Programmer, Head Designer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Vue.js', 'TypeScript', 'Firebase'],
         images: [
@@ -73,7 +73,7 @@ window.projectContent = [
     {
         id: '6',
         name: 'Golf Quest Mini',
-        dates: '2024-11 - 2025-02',
+        dates: 'March 2025-April 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Swift', 'iOS', 'CoreData'],
@@ -87,7 +87,7 @@ window.projectContent = [
     {
         id: '7',
         name: 'Blank Slate',
-        dates: '2024-09 - 2024-10',
+        dates: 'November 2022-December 2022',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Angular', 'RxJS', 'Material UI'],
@@ -101,7 +101,7 @@ window.projectContent = [
     {
         id: '8',
         name: 'Pyoko Pyoko',
-        dates: '2024-09 - 2024-10',
+        dates: 'February 2025-March 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Angular', 'RxJS', 'Material UI'],
@@ -115,8 +115,8 @@ window.projectContent = [
     {
         id: '9',
         name: 'Deciduous',
-        dates: '2024-06 - 2024-08',
-        members: '2 members - Team Role',
+        dates: 'November 2019-December 2019',
+        members: '2 members - Lead Programmer, Musician, Gameplay Designer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Three.js', 'WebGL', 'GLSL'],
         images: [
@@ -129,7 +129,7 @@ window.projectContent = [
     {
         id: '10',
         name: 'reVersed',
-        dates: '2024-04 - 2024-05',
+        dates: 'October 2019-November 2019',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
@@ -143,7 +143,7 @@ window.projectContent = [
     {
         id: '11',
         name: 'Parallel Protocol',
-        dates: '2024-04 - 2024-05',
+        dates: 'November 2025-December 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
@@ -157,7 +157,7 @@ window.projectContent = [
     {
         id: '12',
         name: 'Brittle Earth Project',
-        dates: '2024-04 - 2024-05',
+        dates: 'January 2026-March 2026',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
@@ -169,7 +169,7 @@ window.projectContent = [
     {
         id: '13',
         name: 'World of Bits',
-        dates: '2024-04 - 2024-05',
+        dates: 'November 2025-December 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
@@ -181,7 +181,7 @@ window.projectContent = [
     {
         id: '14',
         name: 'Cuphead UI/UX Mod',
-        dates: '2024-04 - 2024-05',
+        dates: 'October 2025-December 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
@@ -195,7 +195,7 @@ window.projectContent = [
     {
         id: '15',
         name: 'The Abandoned Factory',
-        dates: '2024-04 - 2024-05',
+        dates: 'September 2023-October 2023',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
