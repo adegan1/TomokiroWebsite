@@ -164,7 +164,23 @@ window.projectContent = [
         images: [
             'resources/images/project-12-img-1.png'
         ],
-        projectUrl: '#'
+        projectLinks: [
+            {
+                label: 'Part 1',
+                url: 'https://tomokiro.itch.io/beyond-the-village',
+                description: 'Part 1 of the Brittle Earth Project. Click the link to play the game and read about the project.'
+            },
+            {
+                label: 'Part 2',
+                url: 'https://tomokiro.itch.io/brittledialogue',
+                description: 'Part 2 of the Brittle Earth Project. Click the link to play the game and read about the project.'
+            },
+            {
+                label: 'Part 3',
+                url: 'https://tomokiro.itch.io/brittleearth-finalproject',
+                description: 'Part 3 of the Brittle Earth Project. Click the link to play the game and read about the project.'
+            }
+        ]
     },
     {
         id: '13',
@@ -176,13 +192,13 @@ window.projectContent = [
         images: [
             'resources/images/project-13-img-1.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://adegan1.github.io/cmpm121-world-of-bits/'
     },
     {
         id: '14',
         name: 'Cuphead UI/UX Mod',
         dates: 'October 2025-December 2025',
-        members: 'Solo',
+        members: '3 members - Lead Designer, UI/UX Designer, Developer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
         skills: ['Rust', 'WebAssembly', 'Performance'],
         images: [
@@ -190,7 +206,19 @@ window.projectContent = [
             'resources/images/project-14-img-2.png',
             'resources/images/project-14-img-3.png'
         ],
-        projectUrl: '#'
+        galleryImages: [
+            'resources/images/project-14-galleryimg-1.png',
+            'resources/images/project-14-galleryimg-2.png',
+            'resources/images/project-14-galleryimg-3.png',
+            'resources/images/project-14-galleryimg-4.png',
+            'resources/images/project-14-galleryimg-5.png',
+            'resources/images/project-14-galleryimg-6.png',
+            'resources/images/project-14-galleryimg-7.png',
+            'resources/images/project-14-galleryimg-8.png',
+            'resources/images/project-14-galleryimg-9.png',
+            'resources/images/project-14-galleryimg-10.png',
+            'resources/images/project-14-galleryimg-11.png'
+        ]
     },
     {
         id: '15',
@@ -202,6 +230,6 @@ window.projectContent = [
         images: [
             'resources/images/project-15-img-1.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://tomokiro.itch.io/the-abandoned-factory'
     }
 ];
