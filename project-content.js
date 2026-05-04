@@ -40,7 +40,7 @@ window.projectContent = [
             'resources/images/project-3-img-2.png',
             'resources/images/project-3-img-3.png'
         ],
-        projectUrl: '#'
+        projectUrl: 'https://gd.games/instant-builds/eff54b1e-18d9-4f6f-b2cf-f764d4428e3b'
     },
     {
         id: '4',

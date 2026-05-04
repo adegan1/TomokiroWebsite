@@ -509,12 +509,16 @@
             link.className = 'project-link';
             link.textContent = 'View Project →';
             link.href = project.projectUrl || '#';
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
 
             if (project.videoSrc) {
                 link.dataset.videoSrc = project.videoSrc;
                 link.dataset.videoTitle = project.videoTitle || project.name || 'Project Video';
                 link.setAttribute('aria-haspopup', 'dialog');
                 link.setAttribute('aria-controls', 'projectVideoModal');
+                link.removeAttribute('target');
+                link.removeAttribute('rel');
             }
 
             info.appendChild(title);
@@ -618,6 +622,20 @@
             link.addEventListener('click', (event) => {
                 event.preventDefault();
                 openProjectVideoModal(link);
+            });
+        });
+
+        const projectPageLinks = document.querySelectorAll('.project-link:not([data-video-src])');
+        projectPageLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href') || '';
+                if (!href || href === '#') {
+                    event.preventDefault();
+                    return;
+                }
+
+                event.preventDefault();
+                window.open(href, '_blank', 'noopener,noreferrer');
             });
         });
 
