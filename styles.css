@@ -768,6 +768,87 @@ section[id] {
     text-decoration: underline;
 }
 
+body.video-modal-open {
+    overflow: hidden;
+}
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.video-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 17, 28, 0.78);
+    backdrop-filter: blur(2px);
+}
+
+.video-modal-dialog {
+    position: relative;
+    width: min(900px, calc(100% - 2rem));
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    background: linear-gradient(180deg, #f3e6dc 0%, #dbc9bb 100%);
+    border: 3px solid #8f6b57;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    padding: 1.25rem;
+}
+
+.video-modal-title {
+    font-size: 1.4rem;
+    color: #2f2520;
+    margin: 0 2rem 0.85rem 0;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #ffffff;
+    background: rgba(124, 30, 233, 0.9);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-modal-close:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.video-player-shell {
+    border-radius: 0.35rem;
+    overflow: hidden;
+    background: #090909;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+#projectVideoPlayer {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: calc(100vh - 14rem);
+}
+
 .more-projects-container {
     grid-column: 1 / -1;
     display: flex;
@@ -962,6 +1043,20 @@ footer {
 
     .portfolio-grid {
         grid-template-columns: 1fr;
+    }
+
+    .video-modal-dialog {
+        width: calc(100% - 1rem);
+        max-height: calc(100vh - 1rem);
+        padding: 1rem;
+    }
+
+    .video-modal-title {
+        font-size: 1.15rem;
+    }
+
+    #projectVideoPlayer {
+        max-height: calc(100vh - 12rem);
     }
 }
 
