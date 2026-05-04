@@ -738,6 +738,28 @@ section[id] {
     margin-bottom: 0.5rem;
 }
 
+.project-dates {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #5f5f5f;
+    margin-bottom: 0.2rem;
+}
+
+.project-members {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #7a7a7a;
+    margin-bottom: 0.6rem;
+}
+
+.project-description {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
 .project-info p {
     color: var(--text-light);
     margin-bottom: 1rem;
