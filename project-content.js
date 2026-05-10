@@ -5,7 +5,7 @@ window.projectContent = [
         dates: 'April 2025-July 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Blender', 'UV Mapping', 'Shader Nodes'],
+        skills: ['Blender', 'UV Mapping', 'Shader Nodes', '3D Modeling', 'Animation'],
         images: [
             'resources/images/project-1-img-1.png',
             'resources/images/project-1-img-2.png',
@@ -20,7 +20,7 @@ window.projectContent = [
         dates: 'February 2026-March 2026',
         members: '4 members - Gameplay Designer, Programmer, Artist',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['React', 'Node.js', 'MongoDB'],
+        skills: ['Unity', 'C#', 'Procedural Generation', 'Visual Effects', 'Playtesting', 'Shader Graph'],
         images: [
             'resources/images/project-2-img-1.png',
             'resources/images/project-2-img-2.png',
@@ -34,7 +34,7 @@ window.projectContent = [
         dates: 'November 2023-December 2023',
         members: '4 members - Lead Programmer, Designer, Sound Engineer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Python', 'Django', 'PostgreSQL'],
+        skills: ['GDevelop', 'Visual Scripting', 'Puzzle Design', 'Collaboration'],
         images: [
             'resources/images/project-3-img-1.png',
             'resources/images/project-3-img-2.png',
@@ -48,7 +48,7 @@ window.projectContent = [
         dates: 'January 2026-February 2026',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Design', 'Figma', 'UI/UX'],
+        skills: ['Unity', 'C#', 'Procedural Generation', 'Custom Editor Tools', 'Packaging'],
         images: [
             'resources/images/project-4-img-1.png',
             'resources/images/project-4-img-2.png',
@@ -62,7 +62,7 @@ window.projectContent = [
         dates: 'July 2021-August 2021',
         members: '2 members - Lead Programmer, Head Designer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Vue.js', 'TypeScript', 'Firebase'],
+        skills: ['Unity', 'C#', 'Trello', 'Systems Design', 'Collaboration'],
         images: [
             'resources/images/project-5-img-1.png',
             'resources/images/project-5-img-2.png',
@@ -76,7 +76,7 @@ window.projectContent = [
         dates: 'February 2025-March 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Swift', 'iOS', 'CoreData'],
+        skills: ['Phaser', 'JavaScript', 'Adobe Photoshop', 'Visual Design'],
         images: [
             'resources/images/project-6-img-1.png',
             'resources/images/project-6-img-2.png',
@@ -90,7 +90,7 @@ window.projectContent = [
         dates: 'November 2022-December 2022',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Angular', 'RxJS', 'Material UI'],
+        skills: ['Unity', 'C#', 'Narrative Design', 'Visual Effects', 'Decision Trees'],
         images: [
             'resources/images/project-7-img-1.png',
             'resources/images/project-7-img-2.png',
@@ -104,7 +104,7 @@ window.projectContent = [
         dates: 'February 2025-March 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Angular', 'RxJS', 'Material UI'],
+        skills: ['Phaser', 'JavaScript', 'Aseprite', 'Local Storage'],
         images: [
             'resources/images/project-8-img-1.png',
             'resources/images/project-8-img-2.png',
@@ -118,7 +118,7 @@ window.projectContent = [
         dates: 'November 2019-December 2019',
         members: '2 members - Lead Programmer, Musician, Gameplay Designer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Three.js', 'WebGL', 'GLSL'],
+        skills: ['Unity', 'C#', 'Music Design', 'Systems Design', 'Collaboration'],
         images: [
             'resources/images/project-9-img-1.png',
             'resources/images/project-9-img-2.png',
@@ -132,7 +132,7 @@ window.projectContent = [
         dates: 'October 2019-November 2019',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Rust', 'WebAssembly', 'Performance'],
+        skills: ['Unity', 'C#', 'Visual Design', 'Tilemap Systems', 'Level Design'],
         images: [
             'resources/images/project-10-img-1.png',
             'resources/images/project-10-img-2.png',
@@ -146,7 +146,7 @@ window.projectContent = [
         dates: 'November 2025-December 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Rust', 'WebAssembly', 'Performance'],
+        skills: ['Unity', 'C#', 'Prototyping', 'Lighting', 'Puzzle Design'],
         images: [
             'resources/images/project-11-img-1.png',
             'resources/images/project-11-img-2.png',
@@ -160,7 +160,7 @@ window.projectContent = [
         dates: 'January 2026-March 2026',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Rust', 'WebAssembly', 'Performance'],
+        skills: ['Inky', 'Narrative Design', 'Playtesting', 'Iterative Design', 'Choice and Consequence Design'],
         images: [
             'resources/images/project-12-img-1.png'
         ],
@@ -188,7 +188,7 @@ window.projectContent = [
         dates: 'November 2025-December 2025',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Rust', 'WebAssembly', 'Performance'],
+        skills: ['GitHub Codespaces', 'TypeScript', 'Web Development', 'GPS Integration'],
         images: [
             'resources/images/project-13-img-1.png'
         ],
@@ -200,7 +200,7 @@ window.projectContent = [
         dates: 'October 2025-December 2025',
         members: '3 members - Lead Designer, UI/UX Designer, Developer',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Rust', 'WebAssembly', 'Performance'],
+        skills: ['UI/UX Design', 'Figma', 'Player Profiles', 'Collaboration'],
         images: [
             'resources/images/project-14-img-1.png',
             'resources/images/project-14-img-2.png',
@@ -226,7 +226,7 @@ window.projectContent = [
         dates: 'September 2023-October 2023',
         members: 'Solo',
         description: 'Write your project summary here. Include the problem, your approach, and the result.',
-        skills: ['Rust', 'WebAssembly', 'Performance'],
+        skills: ['Twine', 'Narrative Design', 'Puzzle Design', 'Playtesting'],
         images: [
             'resources/images/project-15-img-1.png'
         ],
