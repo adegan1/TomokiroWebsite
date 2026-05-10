@@ -612,8 +612,26 @@
             members.textContent = project.members || 'Solo';
 
             const description = document.createElement('p');
+            const descriptionText = (project.description || '').trim();
             description.className = 'project-description';
-            description.textContent = project.description || '';
+            description.textContent = descriptionText;
+
+            const descriptionToggle = document.createElement('button');
+            descriptionToggle.type = 'button';
+            descriptionToggle.className = 'project-description-toggle';
+            descriptionToggle.textContent = 'Read More';
+            descriptionToggle.hidden = true;
+
+            if (descriptionText.length > 180) {
+                description.classList.add('is-collapsed');
+                descriptionToggle.hidden = false;
+                descriptionToggle.setAttribute('aria-expanded', 'false');
+                descriptionToggle.addEventListener('click', () => {
+                    const isCollapsed = description.classList.toggle('is-collapsed');
+                    descriptionToggle.setAttribute('aria-expanded', String(!isCollapsed));
+                    descriptionToggle.textContent = isCollapsed ? 'Read more' : 'Show less';
+                });
+            }
 
             const tags = document.createElement('div');
             tags.className = 'project-tags';
@@ -657,6 +675,7 @@
             info.appendChild(dates);
             info.appendChild(members);
             info.appendChild(description);
+            info.appendChild(descriptionToggle);
             info.appendChild(tags);
             info.appendChild(link);
 

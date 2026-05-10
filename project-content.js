@@ -4,7 +4,7 @@ window.projectContent = [
         name: 'Fresh Coat of Fur',
         dates: 'April 2025-July 2025',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Fresh Coat of Fur is a 3D animated short film created using Blender. I wrote, directed, modeled, rigged, animated, and rendered the entire film myself. This project is heavily inspired by Finji\'s game Tunic, and I hoped to create a short film that captured the same whimsical and charming aesthetic. Fresh Coat of Fur won first place among Kyoto University students voted on by peers and faculty.',
         skills: ['Blender', 'UV Mapping', 'Shader Nodes', '3D Modeling', 'Animation'],
         images: [
             'resources/images/project-1-img-1.png',
@@ -19,7 +19,7 @@ window.projectContent = [
         name: 'Balajong',
         dates: 'February 2026-March 2026',
         members: '4 members - Gameplay Designer, Programmer, Artist',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Balajong is a roguelike deck-builder game developed in Unity. It is heavily inspired by works such as Balatro and Slay the Spire, featuring custom Mahjong tiles and Jokers that are used to create powerful combinations and synergies. I was responsible for programming the tiles, visual effects, procedural generation systems, playtesting the game, among many other tasks. Balajong won first place in both the Gameplay and Overall categories ahead of 35 other participating teams at UCSC.',
         skills: ['Unity', 'C#', 'Procedural Generation', 'Visual Effects', 'Playtesting', 'Shader Graph'],
         images: [
             'resources/images/project-2-img-1.png',
@@ -33,7 +33,7 @@ window.projectContent = [
         name: 'Piece of Mind',
         dates: 'November 2023-December 2023',
         members: '4 members - Lead Programmer, Designer, Sound Engineer',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Piece of Mind is a narrative-driven puzzle game developed in GDevelop. It features a unique hand-drawn visual style and a story that explores themes of loss and acceptance. I was responsible for programming the game\'s mechanics, including the puzzle systems and narrative progression. I also collaborated closely with the designer and sound engineer to ensure that the gameplay and audio worked closely together to create an immersive experience.',
         skills: ['GDevelop', 'Visual Scripting', 'Puzzle Design', 'Collaboration'],
         images: [
             'resources/images/project-3-img-1.png',

@@ -800,7 +800,31 @@ section[id] {
 
 .project-description {
     color: var(--text-light);
-    margin-bottom: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+.project-description.is-collapsed {
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-description-toggle {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0 0 0.9rem 0;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.project-description-toggle:hover {
+    text-decoration: underline;
 }
 
 .project-info p {
