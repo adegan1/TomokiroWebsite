@@ -66,7 +66,7 @@
             <section class="intro">
                 <div class="container">
                     <h2>Hello, I'm Andrew Degan</h2>
-                    <p>My brief introduction will go here. Describe what I do, my passions, and what makes me unique.</p>
+                    <p>I am a passionate designer, developer, and creator.</p>
                 </div>
             </section>
 
@@ -82,20 +82,19 @@
                     <div class="container">
                         <div class="about-grid">
                             <div class="about-text">
+                                <h2>Who Am I?</h2>
+                                <p>Hi! I'm Andrew Degan, a passionate designer, developer, and creator based in Aptos, California.
+                                    I specialize in Video Game design and production, built upon my love for turning humble ideas 
+                                    into immersive experiences, especially those that bring joy and inspiration to others.
+                                </p>
+
                                 <h2>My Story</h2>
-                                <p>Write my background story here. Talk about my journey, how I got started in my field, and what drives me.</p>
-                                <p>Share my experiences, education, and the path that led me to where I am today.</p>
-                                
-                                <h2>What I Do</h2>
-                                <p>Describe my current work, projects, or areas of focus. What am I passionate about?</p>
-                                
-                                <h2>My Values</h2>
-                                <ul>
-                                    <li>Innovation and creativity</li>
-                                    <li>Continuous learning</li>
-                                    <li>Collaboration and teamwork</li>
-                                    <li>Excellence in execution</li>
-                                </ul>
+                                <p>I have been uniquely interested in the medium of Video Games for as long as I can remember. 
+                                    Each game I played sparked a desire to understand how it was made on a technical level,
+                                    leading me to explore the vast world of game development. From design, programming, and art
+                                    to storytelling and understanding how people interact with video games from a psychological perspective.
+                                    I strive to create the best experiences possible, and I am always eager to learn and grow as a creator!
+                                </p>
                             </div>
                             <div class="about-image">
                                 <div class="about-slideshow">
@@ -104,14 +103,40 @@
                                     <img src="resources/images/about-03.png" alt="Andrew Degan photo 3" class="about-slide">
                                     <img src="resources/images/about-04.png" alt="Andrew Degan photo 4" class="about-slide">
                                 </div>
+                                <button class="open-resume-btn" id="openResumeBtn" type="button" title="Open Resume in new tab" aria-label="Open resume in new tab">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </button>
                             </div>
-                            <button class="open-resume-btn" id="openResumeBtn" type="button" title="Open Resume in new tab" aria-label="Open resume in new tab">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                            </button>
+                            <p class="about-wide-paragraph">From a young age, I have participated in programming classes and various game development projects both solo
+                                and collaboratively, honing my skills across a wide range of disciplines. From my work in my high school's
+                                career center to my study abroad in Japan, focusing on cultural differences in game design and player
+                                experience. I have had the wonderful opportunity to work on a variety of projects, from small game jams to 
+                                larger scale productions at my University. I value personalization, and thus this very website has been 
+                                built from the ground up by me, hand-coded in HTML, CSS, and JavaScript with accessibility and 
+                                performance in mind!
+                            </p>
+                            <div class="about-text about-text-lower">
+                                <h2>My Values</h2>
+                                <ul>
+                                    <li>Innovation and creativity</li>
+                                    <li>Continuous learning</li>
+                                    <li>Collaboration and teamwork</li>
+                                    <li>Excellence in execution</li>
+                                    <li>Agency and accessibility</li>
+                                    <li>Iterative design</li>
+                                    <li>Inclusion and acceptance</li>
+                                    <li>Efficiency and productivity</li>
+                                </ul>
+
+                                <h2>Current Status</h2>
+                                <p>As of May 2026, I am a senior at the University of California, Santa Cruz, pursuing a bachelor's
+                                    degree in Computer Science: Computer Game Design. </p>
+                                <p>I am currently seeking opportunities to apply my skills and knowledge in the field of game development!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +224,8 @@
 
                             <div class="contact-form">
                                 <h2>Send Me a Message</h2>
-                                <form id="contactForm" aria-label="Contact form">
+                                <form id="contactForm" aria-label="Contact form" method="post" action="javascript:void(0);">
+                                    <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" id="name" name="name" autocomplete="name" placeholder="Let me know who you are!" required>
@@ -217,6 +243,7 @@
                                         <textarea id="message" name="message" rows="5" placeholder="Share your idea, project, or question here..." required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Send Message</button>
+                                    <p id="contactFormStatus" class="form-status" role="status" aria-live="polite"></p>
                                 </form>
                             </div>
                         </div>
@@ -460,6 +487,88 @@
         openResumeBtn.addEventListener('click', () => {
             window.open('resources/resume.pdf', '_blank');
         });
+
+        // Contact form email sending (FormSubmit AJAX)
+        const contactForm = document.getElementById('contactForm');
+        const contactFormStatus = document.getElementById('contactFormStatus');
+
+        if (contactForm && contactFormStatus) {
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const submitDefaultText = submitButton ? submitButton.textContent : 'Send Message';
+            const recipientEmail = 'andrewdegan100@gmail.com';
+            const endpoint = `https://formsubmit.co/ajax/${recipientEmail}`;
+
+            function setContactStatus(text, type) {
+                contactFormStatus.textContent = text;
+                contactFormStatus.classList.remove('is-success', 'is-error');
+                if (type === 'success') {
+                    contactFormStatus.classList.add('is-success');
+                }
+                if (type === 'error') {
+                    contactFormStatus.classList.add('is-error');
+                }
+            }
+
+            contactForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const formData = new FormData(contactForm);
+                const name = String(formData.get('name') || '').trim();
+                const email = String(formData.get('email') || '').trim();
+                const subject = String(formData.get('subject') || '').trim();
+                const message = String(formData.get('message') || '').trim();
+                const honey = String(formData.get('_honey') || '').trim();
+
+                if (!name || !email || !subject || !message) {
+                    setContactStatus('Please complete all fields before sending.', 'error');
+                    return;
+                }
+
+                if (honey) {
+                    setContactStatus('Unable to send right now. Please try again.', 'error');
+                    return;
+                }
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+                }
+                setContactStatus('Sending your message...', '');
+
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Accept: 'application/json'
+                        },
+                        body: JSON.stringify({
+                            _subject: `Portfolio message: ${subject}`,
+                            name,
+                            email,
+                            subject,
+                            message
+                        })
+                    });
+
+                    const result = await response.json().catch(() => ({}));
+                    if (!response.ok || result.success === false) {
+                        throw new Error(result.message || 'Send failed');
+                    }
+
+                    contactForm.reset();
+                    setContactStatus('Message sent successfully. Thanks for reaching out!', 'success');
+                } catch (error) {
+                    setContactStatus('Sorry, your message could not be sent. Please email me directly for now.', 'error');
+                } finally {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = submitDefaultText;
+                    }
+                }
+            });
+        }
 
         // Render portfolio cards from dedicated content file
         const projectContent = Array.isArray(window.projectContent) ? window.projectContent : [];

@@ -546,9 +546,17 @@ section[id] {
 .about-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 3rem;
+    column-gap: 3rem;
+    row-gap: 1rem;
     align-items: start;
     position: relative;
+}
+
+.about-image {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
 }
 
 .about-text h2 {
@@ -569,6 +577,43 @@ section[id] {
 .about-text ul {
     margin-left: 1.5rem;
     color: var(--text-light);
+}
+
+.about-wide-paragraph {
+    grid-column: 1 / -1;
+    margin: 0 0 1rem 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.about-text-lower {
+    grid-column: 1 / -1;
+}
+
+.about-text-lower h2:first-child {
+    margin-top: 0rem;
+}
+
+.about-text-lower ul {
+    list-style: none;
+    margin: 0 0 1.35rem 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 0.75rem;
+}
+
+.about-text-lower ul li {
+    margin: 0;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.58);
+    background: rgba(74, 120, 88, 0.55);
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    box-shadow: 0 3px 10px rgba(8, 8, 25, 0.16);
 }
 
 .about-slideshow {
@@ -597,9 +642,7 @@ section[id] {
 }
 
 .open-resume-btn {
-    position: absolute;
-    top: calc(70%);
-    right: 0;
+    position: relative;
     width: 48px;
     height: 48px;
     border-radius: 0.5rem;
@@ -1103,6 +1146,21 @@ body.modal-open {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-status {
+    min-height: 1.4rem;
+    margin-top: 0.35rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.form-status.is-success {
+    color: #8df0a2;
+}
+
+.form-status.is-error {
+    color: #ffc9c9;
 }
 
 /* Footer */
