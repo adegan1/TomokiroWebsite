@@ -377,6 +377,7 @@
         let currentVideo = 0;
         let videosPaused = false;
         let heroPlaybackRetryId = null;
+        let isHeroTransitioning = false;
 
         function playCurrentVideo() {
             const activeVideo = heroVideos[currentVideo];
@@ -422,6 +423,46 @@
             if (!videosPaused) {
                 playCurrentVideo();
             }
+        }
+
+        function transitionToNextHeroVideo() {
+            if (videosPaused || isHeroTransitioning) {
+                return;
+            }
+
+            const currentIndex = currentVideo;
+            const currentClip = heroVideos[currentIndex];
+            const nextIndex = (currentIndex + 1) % heroVideos.length;
+            const nextClip = heroVideos[nextIndex];
+
+            if (!currentClip || !nextClip) {
+                return;
+            }
+
+            isHeroTransitioning = true;
+            currentClip.pause();
+
+            const finalizeTransition = () => {
+                if (!isHeroTransitioning) {
+                    return;
+                }
+
+                currentClip.classList.remove('active');
+                nextClip.classList.add('active');
+                nextClip.currentTime = 0;
+                currentVideo = nextIndex;
+                isHeroTransitioning = false;
+                startHeroVideoPlayback();
+            };
+
+            if (nextClip.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                finalizeTransition();
+                return;
+            }
+
+            nextClip.load();
+            nextClip.addEventListener('loadeddata', finalizeTransition, { once: true });
+            nextClip.addEventListener('canplay', finalizeTransition, { once: true });
         }
 
         window.addEventListener('load', startHeroVideoPlayback);
@@ -477,6 +518,7 @@
                 video.currentTime = 0;
                 video.classList.remove('active');
             });
+            isHeroTransitioning = false;
             
             // Reset to first video
             currentVideo = 0;
@@ -493,13 +535,7 @@
         heroVideos.forEach((video) => {
             video.addEventListener('timeupdate', () => {
                 if (video.currentTime >= 8 && video.classList.contains('active') && !videosPaused) {
-                    video.pause();
-                    video.classList.remove('active');
-                    const nextVideo = (currentVideo + 1) % heroVideos.length;
-                    heroVideos[nextVideo].classList.add('active');
-                    heroVideos[nextVideo].currentTime = 0;
-                    currentVideo = nextVideo;
-                    playCurrentVideo();
+                    transitionToNextHeroVideo();
                 }
             });
         });
