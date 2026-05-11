@@ -423,6 +423,12 @@
                         return;
                     }
 
+                    // If this clip URL/format is invalid, skip to the next clip instead of stalling.
+                    if (activeVideo.error && activeVideo.error.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+                        playNextHeroVideo();
+                        return;
+                    }
+
                     window.clearTimeout(heroPlaybackRetryId);
                     heroPlaybackRetryId = window.setTimeout(() => {
                         if (!videosPaused && activeVideo === heroVideos[currentVideo] && activeVideo.paused) {
@@ -531,6 +537,12 @@
             });
 
             video.addEventListener('ended', () => {
+                if (index === currentVideo && !videosPaused) {
+                    playNextHeroVideo();
+                }
+            });
+
+            video.addEventListener('error', () => {
                 if (index === currentVideo && !videosPaused) {
                     playNextHeroVideo();
                 }

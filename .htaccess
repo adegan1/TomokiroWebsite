@@ -1,0 +1,16 @@
+# Serve known video MIME types correctly
+AddType video/mp4 .mp4
+AddType video/webm .webm
+AddType video/ogg .ogv .ogg
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# If the requested path is an existing file or folder, serve it directly.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Otherwise route to index for SPA-style navigation.
+RewriteRule ^ index.html [L]
+</IfModule>
