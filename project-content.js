@@ -19,7 +19,7 @@ window.projectContent = [
         name: 'Balajong',
         dates: 'February 2026-March 2026',
         members: '4 members - Gameplay Designer, Programmer, Artist',
-        description: 'Balajong is a roguelike deck-builder game developed in Unity. It is heavily inspired by works such as Balatro and Slay the Spire, featuring custom Mahjong tiles and Jokers that are used to create powerful combinations and synergies. I was responsible for programming the tiles, visual effects, procedural generation systems, playtesting the game, among many other tasks. Balajong won first place in both the Gameplay and Overall categories ahead of 35 other participating teams at UCSC.',
+        description: 'Balajong is a roguelike deck-builder game developed in Unity. It is heavily inspired by LocalThunk\'s Balatro and Hong Kong Mahjong, featuring custom Mahjong tiles, Jokers, and items that are used to create powerful combinations and synergies. I was responsible for programming the tiles, visual effects, procedural generation systems, playtesting the game, among many other tasks. Balajong won first place in both the Gameplay and Overall categories ahead of 35 other participating teams at UCSC.',
         skills: ['Unity', 'C#', 'Procedural Generation', 'Visual Effects', 'Playtesting', 'Shader Graph'],
         images: [
             'resources/images/project-2-img-1.png',
@@ -47,7 +47,7 @@ window.projectContent = [
         name: 'Unity Tree Generator',
         dates: 'January 2026-February 2026',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Unity Tree Generator, or TreeGen, is a tool developed in Unity for creating procedural trees. Through designing and implementing procedural generation algorithms, I created a system that allows users to generate a wide variety of tree shapes and styles with customizable parameters. I also developed a custom editor interface to make it easy for users to interact with the tool and create their own unique trees. TreeGen is available as a package on GitHub for other developers to use in their own projects.',
         skills: ['Unity', 'C#', 'Procedural Generation', 'Custom Editor Tools', 'Packaging'],
         images: [
             'resources/images/project-4-img-1.png',
@@ -61,7 +61,7 @@ window.projectContent = [
         name: 'Spellbinding Sweets',
         dates: 'July 2021-August 2021',
         members: '2 members - Lead Programmer, Head Designer',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Spellbinding Sweets is a singleplayer multitasking cooking game developed for a week-long game jam. Players take orders and prepare various magical desserts under time pressure. I was responsible for programming the game\'s mechanics, including the ingredient combination system, ordering, and scoring systems. The game emphasizes task management and planning to achieve high scores.',
         skills: ['Unity', 'C#', 'Trello', 'Systems Design', 'Collaboration'],
         images: [
             'resources/images/project-5-img-1.png',
@@ -75,7 +75,7 @@ window.projectContent = [
         name: 'Golf Quest Mini',
         dates: 'February 2025-March 2025',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Golf Quest Mini is a short golf-based RPG game developed in Phaser using JavaScript. The game is a recreation of the fake game of the same name from the show "Steven Universe" (episode: "Rose\'s Room") built from the ground up. I took what little was shown of the game in the episode and expanded upon it to create a more complete and interactive experience. This recreation is a concept of what a full version of the game could entail.',
         skills: ['Phaser', 'JavaScript', 'Adobe Photoshop', 'Visual Design'],
         images: [
             'resources/images/project-6-img-1.png',
@@ -89,7 +89,7 @@ window.projectContent = [
         name: 'Blank Slate',
         dates: 'November 2022-December 2022',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Blank Slate is a narrative-driven game developed in Unity. Players navigate through a series of choices that shape the story and influence their outcome. The game features a branching narrative structure with over 35 different possible endings and accompanying data visualizations that show the player\'s unique path through the story. The game explores the idea of priority and how our choices reflect our values and beliefs. Blank Slate was selected to be showcased at UCSC\'s Kresge College\'s annual parent day student showcase event.',
         skills: ['Unity', 'C#', 'Narrative Design', 'Visual Effects', 'Decision Trees'],
         images: [
             'resources/images/project-7-img-1.png',
@@ -103,7 +103,7 @@ window.projectContent = [
         name: 'Pyoko Pyoko',
         dates: 'February 2025-March 2025',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Pyoko Pyoko is a fast-paced endless runner game developed in Phaser using JavaScript. Players control a character who must navigate through increasingly quick obstacles to traverse as far as possible in order to achieve a new high score. I created the game with a focus on tight controls and responsive gameplay, as well as a vibrant and colorful visual style. The game also features a persistent high score system that allows players to compete against themselves to achieve their best score.',
         skills: ['Phaser', 'JavaScript', 'Aseprite', 'Local Storage'],
         images: [
             'resources/images/project-8-img-1.png',
@@ -117,7 +117,7 @@ window.projectContent = [
         name: 'Deciduous',
         dates: 'November 2019-December 2019',
         members: '2 members - Lead Programmer, Musician, Gameplay Designer',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Deciduous is a 2D platformer game inspired by Nintendo\'s "Mario Bros" (1983). Players must navigate through a series of levels filled with various enemies that they must defeat by hitting them from below. I was responsible for programming the game\'s mechanics, including player movement, enemy behavior, and level progression. I also personally composed the game\'s music and designed the levels.',
         skills: ['Unity', 'C#', 'Music Design', 'Systems Design', 'Collaboration'],
         images: [
             'resources/images/project-9-img-1.png',
@@ -131,7 +131,7 @@ window.projectContent = [
         name: 'reVersed',
         dates: 'October 2019-November 2019',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'reVersed is a 2D puzzle-platformer game developed in Unity. Players control a character who can invert the world\'s colors to solve puzzles and navigate through levels. I created the game with a focus on innovative mechanics and unique level design that changes depending on the current verse of game\'s poem. I am responsible for programming the game\'s mechanics, puzzle/level design, and art work.',
         skills: ['Unity', 'C#', 'Visual Design', 'Tilemap Systems', 'Level Design'],
         images: [
             'resources/images/project-10-img-1.png',
@@ -145,7 +145,7 @@ window.projectContent = [
         name: 'Parallel Protocol',
         dates: 'November 2025-December 2025',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'Parallel Protocol is a puzzle game prototype developed in Unity. Players control two characters, one directly and one indirectly, to solve various puzzles and progress through the game. Parallel Protocol was developed as a small prototype in only a few days, showcasing a unique mechanic that I found particularly interesting that could be expanded upon in a larger project. Despite its small scope and simple visuals, Parallel Protocol demonstrates my ability to quickly prototype and iterate on game ideas.',
         skills: ['Unity', 'C#', 'Prototyping', 'Lighting', 'Puzzle Design'],
         images: [
             'resources/images/project-11-img-1.png',
@@ -159,7 +159,7 @@ window.projectContent = [
         name: 'Brittle Earth Project',
         dates: 'January 2026-March 2026',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'The Brittle Earth Project is a three-part narrative-driven interactive experience developed in Inky. Players navigate through a series of choices that shape the story and influence their outcome. The game explores themes of environmental degradation and risks. I am responsible for narrative design, playtesting, and iterative design based on feedback. Parts one and two are closely connected, while part three takes place further in the future, though all three may act as standalone experiences.',
         skills: ['Inky', 'Narrative Design', 'Playtesting', 'Iterative Design', 'Choice and Consequence Design'],
         images: [
             'resources/images/project-12-img-1.png'
@@ -187,7 +187,7 @@ window.projectContent = [
         name: 'World of Bits',
         dates: 'November 2025-December 2025',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'World of Bits is a web-based game developed using GitHub Codespaces using TypeScript. Players use their real-world GPS location to explore a virtual grid-based world covered in "bits" of various values. By picking these up and combining them, players can create higher and higher valued bits to reach a goal. The game is designed to encourage players to explore their real-world surroundings and discover new places while engaging with the game\'s mechanics.',
         skills: ['GitHub Codespaces', 'TypeScript', 'Web Development', 'GPS Integration'],
         images: [
             'resources/images/project-13-img-1.png'
@@ -199,7 +199,7 @@ window.projectContent = [
         name: 'Cuphead UI/UX Mod',
         dates: 'October 2025-December 2025',
         members: '3 members - Lead Designer, UI/UX Designer, Developer',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'The Cuphead UI/UX Mod is a project focused on redesigning the user interface and user experience of the popular game Cuphead, focusing on adjusting it to fit the party game genre. The team aimed to redesign the popular game\'s UI to be more welcoming to more casual players and inspire a more competitive experince capable of up to four concurrent players. I was responsible for designing the new UI/UX, creating mockups and prototypes, and creating mood boards and player profiles to guide the design process.',
         skills: ['UI/UX Design', 'Figma', 'Player Profiles', 'Collaboration'],
         images: [
             'resources/images/project-14-img-1.png',
@@ -225,7 +225,7 @@ window.projectContent = [
         name: 'The Abandoned Factory',
         dates: 'September 2023-October 2023',
         members: 'Solo',
-        description: 'Write your project summary here. Include the problem, your approach, and the result.',
+        description: 'The Abandoned Factory is a text-based adventure puzzle game developed in Twine. Players navigate through a mysterious abandoned factory, solving puzzles and uncovering the story behind the factory\'s history. The game features a branching narrative with multiple endings based on the player\'s choices. I was responsible for designing the puzzles, writing the narrative, and playtesting the game to ensure a smooth and engaging experience.',
         skills: ['Twine', 'Narrative Design', 'Puzzle Design', 'Playtesting'],
         images: [
             'resources/images/project-15-img-1.png'
