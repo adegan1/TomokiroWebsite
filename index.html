@@ -33,12 +33,12 @@
         <main class="content" id="mainContent" tabindex="-1">
             <section id="home" class="hero">
                 <div class="hero-media" aria-hidden="true">
-                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline preload="auto"></video>
+                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline preload="metadata"></video>
                     <video class="hero-clip" src="resources/videos/clip-02.mp4" muted playsinline preload="metadata"></video>
-                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline preload="none"></video>
-                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline preload="none"></video>
-                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline preload="none"></video>
-                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline preload="none"></video>
+                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline preload="metadata"></video>
                 </div>
                 <div class="hero-overlay" aria-hidden="true"></div>
                 <button class="video-pause-btn" id="videoPauseBtn" type="button" aria-label="Pause video" aria-pressed="false">
@@ -265,6 +265,7 @@
                 ×
             </button>
             <h2 class="video-modal-title" id="projectVideoTitle">Fresh Coat of Fur</h2>
+            <p id="projectVideoDebugStatus" style="margin:0 0 0.75rem 0;color:#5b4a41;font-size:0.85rem;line-height:1.3;"></p>
             <div class="video-player-shell">
                 <video id="projectVideoPlayer" controls preload="metadata" playsinline>
                     <source id="projectVideoSource" src="" type="video/mp4">
@@ -377,7 +378,6 @@
         let currentVideo = 0;
         let videosPaused = false;
         let heroPlaybackRetryId = null;
-        let isHeroTransitioning = false;
 
         function primeNextHeroVideo(fromIndex = currentVideo) {
             const nextIndex = (fromIndex + 1) % heroVideos.length;
@@ -386,21 +386,21 @@
                 return;
             }
 
-            if (nextClip.preload === 'none') {
-                nextClip.preload = 'metadata';
-            }
             nextClip.load();
         }
 
-        function getFirstReadyHeroIndex(startIndex) {
-            for (let step = 1; step <= heroVideos.length; step += 1) {
-                const candidate = (startIndex + step) % heroVideos.length;
-                const clip = heroVideos[candidate];
-                if (clip && clip.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-                    return candidate;
-                }
+        function setActiveHeroVideo(index, resetTime = false) {
+            const target = heroVideos[index];
+            if (!target) {
+                return;
             }
-            return startIndex;
+
+            heroVideos.forEach(video => video.classList.remove('active'));
+            target.classList.add('active');
+            currentVideo = index;
+            if (resetTime) {
+                target.currentTime = 0;
+            }
         }
 
         function playCurrentVideo() {
@@ -450,67 +450,14 @@
             }
         }
 
-        function transitionToNextHeroVideo() {
-            if (videosPaused || isHeroTransitioning) {
+        function playNextHeroVideo() {
+            if (videosPaused) {
                 return;
             }
 
-            const currentIndex = currentVideo;
-            const currentClip = heroVideos[currentIndex];
-            const nextIndex = (currentIndex + 1) % heroVideos.length;
-            const nextClip = heroVideos[nextIndex];
-
-            if (!currentClip || !nextClip) {
-                return;
-            }
-
-            isHeroTransitioning = true;
-            let fallbackTimerId = null;
-
-            const finalizeTransition = (targetIndex) => {
-                if (!isHeroTransitioning) {
-                    return;
-                }
-
-                const targetClip = heroVideos[targetIndex];
-                if (!targetClip) {
-                    isHeroTransitioning = false;
-                    return;
-                }
-
-                window.clearTimeout(fallbackTimerId);
-                currentClip.classList.remove('active');
-                targetClip.classList.add('active');
-                targetClip.currentTime = 0;
-                currentVideo = targetIndex;
-                isHeroTransitioning = false;
-                startHeroVideoPlayback();
-            };
-
-            if (nextClip.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-                finalizeTransition(nextIndex);
-                return;
-            }
-
-            primeNextHeroVideo(currentIndex);
-
-            // Keep current clip alive while waiting so the hero never freezes on black.
-            currentClip.currentTime = 0;
+            const nextIndex = (currentVideo + 1) % heroVideos.length;
+            setActiveHeroVideo(nextIndex, true);
             startHeroVideoPlayback();
-
-            const finalizeNext = () => finalizeTransition(nextIndex);
-            nextClip.addEventListener('loadeddata', finalizeNext, { once: true });
-            nextClip.addEventListener('canplay', finalizeNext, { once: true });
-
-            // If immediate next clip still is not ready, switch to any ready clip without stalling playback.
-            fallbackTimerId = window.setTimeout(() => {
-                if (!isHeroTransitioning) {
-                    return;
-                }
-
-                const fallbackIndex = getFirstReadyHeroIndex(currentIndex);
-                finalizeTransition(fallbackIndex);
-            }, 1200);
         }
 
         window.addEventListener('load', startHeroVideoPlayback);
@@ -564,9 +511,7 @@
             heroVideos.forEach(video => {
                 video.pause();
                 video.currentTime = 0;
-                video.classList.remove('active');
             });
-            isHeroTransitioning = false;
 
             if (videosPaused) {
                 videosPaused = false;
@@ -574,19 +519,20 @@
             }
             
             // Reset to first video
-            currentVideo = 0;
-            heroVideos[0].classList.add('active');
+            setActiveHeroVideo(0, true);
             startHeroVideoPlayback();
         });
 
-        heroVideos.forEach((video) => {
-            video.addEventListener('timeupdate', () => {
-                if (video.classList.contains('active') && video.currentTime >= 6 && !videosPaused) {
+        heroVideos.forEach((video, index) => {
+            video.addEventListener('playing', () => {
+                if (index === currentVideo) {
                     primeNextHeroVideo(currentVideo);
                 }
+            });
 
-                if (video.currentTime >= 8 && video.classList.contains('active') && !videosPaused) {
-                    transitionToNextHeroVideo();
+            video.addEventListener('ended', () => {
+                if (index === currentVideo && !videosPaused) {
+                    playNextHeroVideo();
                 }
             });
         });
@@ -857,9 +803,31 @@
         const projectDetailsContent = document.getElementById('projectDetailsContent');
         const closeProjectDetailsBtn = document.getElementById('closeProjectDetailsBtn');
         const projectDetailsOverlay = document.getElementById('projectDetailsOverlay');
+        const projectVideoDebugStatus = document.getElementById('projectVideoDebugStatus');
         let lastFocusedElement = null;
         let projectVideoCandidates = [];
         let projectVideoCandidateIndex = -1;
+        const projectVideoDebug = true;
+
+        function debugProjectVideo(message, details) {
+            const statusText = typeof details === 'undefined'
+                ? message
+                : `${message} ${JSON.stringify(details)}`;
+
+            if (!projectVideoDebug) {
+                return;
+            }
+
+            if (typeof details === 'undefined') {
+                console.log(`[ProjectVideo] ${message}`);
+            } else {
+                console.log(`[ProjectVideo] ${message}`, details);
+            }
+
+            if (projectVideoDebugStatus) {
+                projectVideoDebugStatus.textContent = statusText;
+            }
+        }
 
         function setModalState(modal, isOpen) {
             modal.classList.toggle('is-open', isOpen);
@@ -912,11 +880,13 @@
 
         function setProjectVideoCandidate(index) {
             if (index < 0 || index >= projectVideoCandidates.length) {
+                debugProjectVideo('Invalid candidate index requested', { index, total: projectVideoCandidates.length });
                 return;
             }
 
             projectVideoCandidateIndex = index;
             const candidate = projectVideoCandidates[index];
+            debugProjectVideo('Trying source candidate', { index, candidate });
             projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
 
             const source = document.createElement('source');
@@ -925,7 +895,9 @@
             projectVideoPlayer.appendChild(source);
 
             projectVideoPlayer.load();
-            projectVideoPlayer.play().catch(() => {});
+            projectVideoPlayer.play().catch((error) => {
+                debugProjectVideo('Play promise rejected', { index, error: error?.message || error });
+            });
         }
 
         function openProjectVideoModal(trigger) {
@@ -944,8 +916,17 @@
                 ? configuredSources
                 : [{ src: videoSrc, type: 'video/mp4' }];
 
+            debugProjectVideo('Opening modal with sources', {
+                title: videoTitle,
+                sourceCount: sourceList.length,
+                sources: sourceList
+            });
+
             lastFocusedElement = trigger;
             projectVideoTitle.textContent = videoTitle;
+            if (projectVideoDebugStatus) {
+                projectVideoDebugStatus.textContent = 'Opening video modal...';
+            }
             projectVideoCandidates = sourceList;
             projectVideoCandidateIndex = -1;
             setModalState(projectVideoModal, true);
@@ -964,6 +945,9 @@
             projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
             projectVideoCandidates = [];
             projectVideoCandidateIndex = -1;
+            if (projectVideoDebugStatus) {
+                projectVideoDebugStatus.textContent = '';
+            }
             projectVideoPlayer.load();
 
             if (lastFocusedElement) {
@@ -972,10 +956,32 @@
         }
 
         projectVideoPlayer.addEventListener('error', () => {
+            const errorCode = projectVideoPlayer.error?.code;
+            debugProjectVideo('Video element error event', {
+                errorCode,
+                currentCandidateIndex: projectVideoCandidateIndex,
+                currentSrc: projectVideoPlayer.currentSrc
+            });
+
             const nextIndex = projectVideoCandidateIndex + 1;
             if (nextIndex < projectVideoCandidates.length) {
+                debugProjectVideo('Falling back to next source candidate', { nextIndex });
                 setProjectVideoCandidate(nextIndex);
+                return;
             }
+
+            debugProjectVideo('No remaining fallback candidates');
+        });
+
+        ['loadedmetadata', 'loadeddata', 'canplay', 'playing', 'waiting', 'stalled', 'suspend'].forEach(eventName => {
+            projectVideoPlayer.addEventListener(eventName, () => {
+                debugProjectVideo(`Player event: ${eventName}`, {
+                    currentSrc: projectVideoPlayer.currentSrc,
+                    readyState: projectVideoPlayer.readyState,
+                    networkState: projectVideoPlayer.networkState,
+                    currentTime: projectVideoPlayer.currentTime
+                });
+            });
         });
 
         function openProjectDetailsModal(trigger) {
