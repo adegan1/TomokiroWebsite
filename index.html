@@ -479,7 +479,6 @@
                 }
 
                 window.clearTimeout(fallbackTimerId);
-                currentClip.pause();
                 currentClip.classList.remove('active');
                 targetClip.classList.add('active');
                 targetClip.currentTime = 0;
@@ -495,12 +494,15 @@
 
             primeNextHeroVideo(currentIndex);
 
+            // Keep current clip alive while waiting so the hero never freezes on black.
+            currentClip.currentTime = 0;
+            startHeroVideoPlayback();
+
             const finalizeNext = () => finalizeTransition(nextIndex);
-            nextClip.load();
             nextClip.addEventListener('loadeddata', finalizeNext, { once: true });
             nextClip.addEventListener('canplay', finalizeNext, { once: true });
 
-            // If the immediate next clip is still not ready, switch to any ready clip instead of freezing.
+            // If immediate next clip still is not ready, switch to any ready clip without stalling playback.
             fallbackTimerId = window.setTimeout(() => {
                 if (!isHeroTransitioning) {
                     return;
@@ -565,17 +567,16 @@
                 video.classList.remove('active');
             });
             isHeroTransitioning = false;
+
+            if (videosPaused) {
+                videosPaused = false;
+                updatePauseButtonIcon();
+            }
             
             // Reset to first video
             currentVideo = 0;
             heroVideos[0].classList.add('active');
             startHeroVideoPlayback();
-            
-            // Ensure we're in playing state
-            if (videosPaused) {
-                videosPaused = false;
-                updatePauseButtonIcon();
-            }
         });
 
         heroVideos.forEach((video) => {
@@ -857,6 +858,8 @@
         const closeProjectDetailsBtn = document.getElementById('closeProjectDetailsBtn');
         const projectDetailsOverlay = document.getElementById('projectDetailsOverlay');
         let lastFocusedElement = null;
+        let projectVideoCandidates = [];
+        let projectVideoCandidateIndex = -1;
 
         function setModalState(modal, isOpen) {
             modal.classList.toggle('is-open', isOpen);
@@ -907,6 +910,24 @@
             return 'video/mp4';
         }
 
+        function setProjectVideoCandidate(index) {
+            if (index < 0 || index >= projectVideoCandidates.length) {
+                return;
+            }
+
+            projectVideoCandidateIndex = index;
+            const candidate = projectVideoCandidates[index];
+            projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
+
+            const source = document.createElement('source');
+            source.src = candidate.src;
+            source.type = candidate.type || inferVideoMimeType(candidate.src);
+            projectVideoPlayer.appendChild(source);
+
+            projectVideoPlayer.load();
+            projectVideoPlayer.play().catch(() => {});
+        }
+
         function openProjectVideoModal(trigger) {
             const videoSrc = trigger.dataset.videoSrc;
             const videoTitle = trigger.dataset.videoTitle || 'Project Video';
@@ -925,19 +946,11 @@
 
             lastFocusedElement = trigger;
             projectVideoTitle.textContent = videoTitle;
-            projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
-
-            sourceList.forEach(item => {
-                const source = document.createElement('source');
-                source.src = item.src;
-                source.type = item.type || inferVideoMimeType(item.src);
-                projectVideoPlayer.appendChild(source);
-            });
-
-            projectVideoPlayer.load();
+            projectVideoCandidates = sourceList;
+            projectVideoCandidateIndex = -1;
             setModalState(projectVideoModal, true);
             closeProjectVideoBtn.focus();
-            projectVideoPlayer.play().catch(() => {});
+            setProjectVideoCandidate(0);
         }
 
         function closeProjectVideoModal() {
@@ -949,12 +962,21 @@
             projectVideoPlayer.pause();
             projectVideoPlayer.currentTime = 0;
             projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
+            projectVideoCandidates = [];
+            projectVideoCandidateIndex = -1;
             projectVideoPlayer.load();
 
             if (lastFocusedElement) {
                 lastFocusedElement.focus();
             }
         }
+
+        projectVideoPlayer.addEventListener('error', () => {
+            const nextIndex = projectVideoCandidateIndex + 1;
+            if (nextIndex < projectVideoCandidates.length) {
+                setProjectVideoCandidate(nextIndex);
+            }
+        });
 
         function openProjectDetailsModal(trigger) {
             const projectId = trigger.dataset.projectId;
