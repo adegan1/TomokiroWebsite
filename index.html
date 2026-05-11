@@ -185,6 +185,15 @@
                                 </button>
 
                                 <div class="additional-projects" id="additionalProjects"></div>
+
+                                <button class="toggle-projects-btn" id="toggleProjectsBtn2" type="button" aria-expanded="false" aria-controls="additionalProjects2" style="display:none;">
+                                    <span class="btn-text">Show More Projects</span>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="chevron">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+
+                                <div class="additional-projects" id="additionalProjects2" style="display:none;"></div>
                             </div>
                         </div>
                     </div>
@@ -817,7 +826,10 @@
             const portfolioGrid = document.querySelector('.portfolio-grid');
             const moreProjectsContainer = document.querySelector('.more-projects-container');
             const additionalProjects = document.getElementById('additionalProjects');
+            const additionalProjects2 = document.getElementById('additionalProjects2');
             const toggleBtn = document.getElementById('toggleProjectsBtn');
+            const toggleBtn2 = document.getElementById('toggleProjectsBtn2');
+            const isMobilePortfolio = window.matchMedia('(max-width: 768px)').matches;
 
             if (!portfolioGrid || !moreProjectsContainer || !additionalProjects || !toggleBtn) {
                 return;
@@ -825,6 +837,7 @@
 
             portfolioGrid.querySelectorAll('.project-card').forEach(card => card.remove());
             additionalProjects.innerHTML = '';
+            additionalProjects2.innerHTML = '';
 
             const featuredProjects = projectContent.slice(0, featuredProjectCount);
             const remainingProjects = projectContent.slice(featuredProjectCount);
@@ -834,17 +847,45 @@
                 portfolioGrid.insertBefore(card, moreProjectsContainer);
             });
 
-            remainingProjects.forEach(project => {
-                const card = buildProjectCard(project);
-                additionalProjects.appendChild(card);
-            });
-
             const hasAdditionalProjects = remainingProjects.length > 0;
             moreProjectsContainer.hidden = !hasAdditionalProjects;
+
             if (!hasAdditionalProjects) {
                 additionalProjects.classList.remove('expanded');
                 toggleBtn.classList.remove('expanded');
                 toggleBtn.setAttribute('aria-expanded', 'false');
+                additionalProjects2.classList.remove('expanded');
+                toggleBtn2.classList.remove('expanded');
+                toggleBtn2.setAttribute('aria-expanded', 'false');
+                return;
+            }
+
+            // Mobile: split into 6 + 6, Desktop: show all
+            if (isMobilePortfolio && remainingProjects.length > 6) {
+                const firstBatch = remainingProjects.slice(0, 6);
+                const secondBatch = remainingProjects.slice(6);
+
+                firstBatch.forEach(project => {
+                    const card = buildProjectCard(project);
+                    additionalProjects.appendChild(card);
+                });
+
+                secondBatch.forEach(project => {
+                    const card = buildProjectCard(project);
+                    additionalProjects2.appendChild(card);
+                });
+
+                toggleBtn2.style.display = 'none';
+                additionalProjects2.style.display = 'none';
+            } else {
+                // Desktop or if remaining <= 6: show all in first batch
+                remainingProjects.forEach(project => {
+                    const card = buildProjectCard(project);
+                    additionalProjects.appendChild(card);
+                });
+
+                toggleBtn2.style.display = 'none';
+                additionalProjects2.style.display = 'none';
             }
         }
 
@@ -1299,6 +1340,8 @@
         // Toggle additional projects
         const toggleBtn = document.getElementById('toggleProjectsBtn');
         const additionalProjects = document.getElementById('additionalProjects');
+        const toggleBtn2 = document.getElementById('toggleProjectsBtn2');
+        const additionalProjects2 = document.getElementById('additionalProjects2');
         
         toggleBtn.addEventListener('click', () => {
             const isExpanded = additionalProjects.classList.toggle('expanded');
@@ -1306,6 +1349,28 @@
             toggleBtn.setAttribute('aria-expanded', String(isExpanded));
             
             const btnText = toggleBtn.querySelector('.btn-text');
+            btnText.textContent = isExpanded ? 'Show Fewer Projects' : 'Show More Projects';
+
+            // Show/hide second button and batch based on first batch expansion
+            toggleBtn2.style.display = isExpanded ? '' : 'none';
+            additionalProjects2.style.display = isExpanded ? '' : 'none';
+
+            // If collapsing the first batch, also collapse the second
+            if (!isExpanded && additionalProjects2.classList.contains('expanded')) {
+                additionalProjects2.classList.remove('expanded');
+                toggleBtn2.classList.remove('expanded');
+                toggleBtn2.setAttribute('aria-expanded', 'false');
+                const btnText2 = toggleBtn2.querySelector('.btn-text');
+                btnText2.textContent = 'Show More Projects';
+            }
+        });
+
+        toggleBtn2.addEventListener('click', () => {
+            const isExpanded = additionalProjects2.classList.toggle('expanded');
+            toggleBtn2.classList.toggle('expanded');
+            toggleBtn2.setAttribute('aria-expanded', String(isExpanded));
+            
+            const btnText = toggleBtn2.querySelector('.btn-text');
             btnText.textContent = isExpanded ? 'Show Fewer Projects' : 'Show More Projects';
         });
 

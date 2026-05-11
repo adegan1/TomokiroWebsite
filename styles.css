@@ -1111,6 +1111,20 @@ body.modal-open {
     max-height: 5000px;
 }
 
+#additionalProjects2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    align-items: start;
+}
+
+#additionalProjects2.expanded {
+    max-height: 5000px;
+}
+
 /* Contact Section */
 .contact-content {
     padding: 4rem 0;
