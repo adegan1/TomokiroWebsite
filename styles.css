@@ -733,6 +733,7 @@ section[id] {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    align-items: start;
 }
 
 .project-card {
@@ -742,6 +743,7 @@ section[id] {
     box-shadow: var(--shadow);
     transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
     border: 4px solid transparent;
+    align-self: start;
 }
 
 .project-card:hover {
@@ -1080,6 +1082,7 @@ body.modal-open {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease;
+    align-items: start;
 }
 
 .additional-projects.expanded {
