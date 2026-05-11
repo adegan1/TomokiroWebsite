@@ -33,12 +33,12 @@
         <main class="content" id="mainContent" tabindex="-1">
             <section id="home" class="hero">
                 <div class="hero-media" aria-hidden="true">
-                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline preload="auto"></video>
                     <video class="hero-clip" src="resources/videos/clip-02.mp4" muted playsinline preload="metadata"></video>
-                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline preload="metadata"></video>
-                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline preload="metadata"></video>
-                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline preload="metadata"></video>
-                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline preload="none"></video>
+                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline preload="none"></video>
+                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline preload="none"></video>
+                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline preload="none"></video>
                 </div>
                 <div class="hero-overlay" aria-hidden="true"></div>
                 <button class="video-pause-btn" id="videoPauseBtn" type="button" aria-label="Pause video" aria-pressed="false">
@@ -379,6 +379,30 @@
         let heroPlaybackRetryId = null;
         let isHeroTransitioning = false;
 
+        function primeNextHeroVideo(fromIndex = currentVideo) {
+            const nextIndex = (fromIndex + 1) % heroVideos.length;
+            const nextClip = heroVideos[nextIndex];
+            if (!nextClip || nextClip.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                return;
+            }
+
+            if (nextClip.preload === 'none') {
+                nextClip.preload = 'metadata';
+            }
+            nextClip.load();
+        }
+
+        function getFirstReadyHeroIndex(startIndex) {
+            for (let step = 1; step <= heroVideos.length; step += 1) {
+                const candidate = (startIndex + step) % heroVideos.length;
+                const clip = heroVideos[candidate];
+                if (clip && clip.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                    return candidate;
+                }
+            }
+            return startIndex;
+        }
+
         function playCurrentVideo() {
             const activeVideo = heroVideos[currentVideo];
             if (!activeVideo) {
@@ -422,6 +446,7 @@
             window.clearTimeout(heroPlaybackRetryId);
             if (!videosPaused) {
                 playCurrentVideo();
+                primeNextHeroVideo();
             }
         }
 
@@ -440,29 +465,50 @@
             }
 
             isHeroTransitioning = true;
-            currentClip.pause();
+            let fallbackTimerId = null;
 
-            const finalizeTransition = () => {
+            const finalizeTransition = (targetIndex) => {
                 if (!isHeroTransitioning) {
                     return;
                 }
 
+                const targetClip = heroVideos[targetIndex];
+                if (!targetClip) {
+                    isHeroTransitioning = false;
+                    return;
+                }
+
+                window.clearTimeout(fallbackTimerId);
+                currentClip.pause();
                 currentClip.classList.remove('active');
-                nextClip.classList.add('active');
-                nextClip.currentTime = 0;
-                currentVideo = nextIndex;
+                targetClip.classList.add('active');
+                targetClip.currentTime = 0;
+                currentVideo = targetIndex;
                 isHeroTransitioning = false;
                 startHeroVideoPlayback();
             };
 
             if (nextClip.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-                finalizeTransition();
+                finalizeTransition(nextIndex);
                 return;
             }
 
+            primeNextHeroVideo(currentIndex);
+
+            const finalizeNext = () => finalizeTransition(nextIndex);
             nextClip.load();
-            nextClip.addEventListener('loadeddata', finalizeTransition, { once: true });
-            nextClip.addEventListener('canplay', finalizeTransition, { once: true });
+            nextClip.addEventListener('loadeddata', finalizeNext, { once: true });
+            nextClip.addEventListener('canplay', finalizeNext, { once: true });
+
+            // If the immediate next clip is still not ready, switch to any ready clip instead of freezing.
+            fallbackTimerId = window.setTimeout(() => {
+                if (!isHeroTransitioning) {
+                    return;
+                }
+
+                const fallbackIndex = getFirstReadyHeroIndex(currentIndex);
+                finalizeTransition(fallbackIndex);
+            }, 1200);
         }
 
         window.addEventListener('load', startHeroVideoPlayback);
@@ -534,6 +580,10 @@
 
         heroVideos.forEach((video) => {
             video.addEventListener('timeupdate', () => {
+                if (video.classList.contains('active') && video.currentTime >= 6 && !videosPaused) {
+                    primeNextHeroVideo(currentVideo);
+                }
+
                 if (video.currentTime >= 8 && video.classList.contains('active') && !videosPaused) {
                     transitionToNextHeroVideo();
                 }
@@ -727,6 +777,7 @@
             const hasLinksModal = Array.isArray(project.projectLinks) && project.projectLinks.length > 0;
 
             if (project.videoSrc) {
+                link.dataset.projectId = String(project.id || '');
                 link.dataset.videoSrc = project.videoSrc;
                 link.dataset.videoTitle = project.videoTitle || project.name || 'Project Video';
                 link.setAttribute('aria-haspopup', 'dialog');
@@ -797,7 +848,6 @@
         // ProjectVideo modal
         const projectVideoModal = document.getElementById('projectVideoModal');
         const projectVideoPlayer = document.getElementById('projectVideoPlayer');
-        const projectVideoSource = document.getElementById('projectVideoSource');
         const projectVideoTitle = document.getElementById('projectVideoTitle');
         const closeProjectVideoBtn = document.getElementById('closeProjectVideoBtn');
         const videoModalOverlay = document.getElementById('videoModalOverlay');
@@ -846,17 +896,44 @@
             };
         }
 
+        function inferVideoMimeType(src) {
+            const lower = String(src || '').toLowerCase();
+            if (lower.endsWith('.webm')) {
+                return 'video/webm';
+            }
+            if (lower.endsWith('.ogg') || lower.endsWith('.ogv')) {
+                return 'video/ogg';
+            }
+            return 'video/mp4';
+        }
+
         function openProjectVideoModal(trigger) {
             const videoSrc = trigger.dataset.videoSrc;
             const videoTitle = trigger.dataset.videoTitle || 'Project Video';
+            const project = projectContentById.get(String(trigger.dataset.projectId || ''));
 
             if (!videoSrc) {
                 return;
             }
 
+            const configuredSources = Array.isArray(project?.videoSources)
+                ? project.videoSources.filter(item => item && item.src)
+                : [];
+            const sourceList = configuredSources.length
+                ? configuredSources
+                : [{ src: videoSrc, type: 'video/mp4' }];
+
             lastFocusedElement = trigger;
             projectVideoTitle.textContent = videoTitle;
-            projectVideoSource.src = videoSrc;
+            projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
+
+            sourceList.forEach(item => {
+                const source = document.createElement('source');
+                source.src = item.src;
+                source.type = item.type || inferVideoMimeType(item.src);
+                projectVideoPlayer.appendChild(source);
+            });
+
             projectVideoPlayer.load();
             setModalState(projectVideoModal, true);
             closeProjectVideoBtn.focus();
@@ -871,7 +948,7 @@
             setModalState(projectVideoModal, false);
             projectVideoPlayer.pause();
             projectVideoPlayer.currentTime = 0;
-            projectVideoSource.removeAttribute('src');
+            projectVideoPlayer.querySelectorAll('source').forEach(source => source.remove());
             projectVideoPlayer.load();
 
             if (lastFocusedElement) {

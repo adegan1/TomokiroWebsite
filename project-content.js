@@ -11,6 +11,16 @@ window.projectContent = [
             'resources/images/project-1-img-2.png',
             'resources/images/project-1-img-3.png'
         ],
+        videoSources: [
+            {
+                src: 'resources/videos/ProjectVideo.websafe.mp4',
+                type: 'video/mp4'
+            },
+            {
+                src: 'resources/videos/ProjectVideo.mp4',
+                type: 'video/mp4'
+            }
+        ],
         videoSrc: 'resources/videos/ProjectVideo.mp4',
         videoTitle: 'Fresh Coat of Fur'
     },
