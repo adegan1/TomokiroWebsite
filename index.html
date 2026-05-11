@@ -33,12 +33,12 @@
         <main class="content" id="mainContent" tabindex="-1">
             <section id="home" class="hero">
                 <div class="hero-media" aria-hidden="true">
-                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-02.mp4" muted playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline></video>
-                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline></video>
+                    <video class="hero-clip active" src="resources/videos/clip-01.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-02.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-03.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-04.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-05.mp4" muted playsinline preload="metadata"></video>
+                    <video class="hero-clip" src="resources/videos/clip-06.mp4" muted playsinline preload="metadata"></video>
                 </div>
                 <div class="hero-overlay" aria-hidden="true"></div>
                 <button class="video-pause-btn" id="videoPauseBtn" type="button" aria-label="Pause video" aria-pressed="false">
@@ -376,16 +376,56 @@
         const pauseBtn = document.getElementById('videoPauseBtn');
         let currentVideo = 0;
         let videosPaused = false;
+        let heroPlaybackRetryId = null;
 
         function playCurrentVideo() {
             const activeVideo = heroVideos[currentVideo];
             if (!activeVideo) {
                 return;
             }
-            activeVideo.play().catch(() => {});
+
+            if (videosPaused) {
+                return;
+            }
+
+            const tryPlay = () => {
+                if (videosPaused || activeVideo !== heroVideos[currentVideo]) {
+                    return;
+                }
+
+                activeVideo.play().catch(() => {
+                    if (videosPaused) {
+                        return;
+                    }
+
+                    window.clearTimeout(heroPlaybackRetryId);
+                    heroPlaybackRetryId = window.setTimeout(() => {
+                        if (!videosPaused && activeVideo === heroVideos[currentVideo] && activeVideo.paused) {
+                            playCurrentVideo();
+                        }
+                    }, 250);
+                });
+            };
+
+            if (activeVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+                activeVideo.load();
+                activeVideo.addEventListener('canplay', tryPlay, { once: true });
+                activeVideo.addEventListener('loadeddata', tryPlay, { once: true });
+                return;
+            }
+
+            tryPlay();
         }
 
-        playCurrentVideo();
+        function startHeroVideoPlayback() {
+            window.clearTimeout(heroPlaybackRetryId);
+            if (!videosPaused) {
+                playCurrentVideo();
+            }
+        }
+
+        window.addEventListener('load', startHeroVideoPlayback);
+        window.addEventListener('pageshow', startHeroVideoPlayback);
 
         // Page Visibility API to handle tab switching
         document.addEventListener('visibilitychange', () => {
@@ -393,12 +433,7 @@
                 // Tab is hidden - browser will handle pausing
             } else {
                 // Tab is visible again - resume if not manually paused
-                if (!videosPaused) {
-                    const activeVideo = heroVideos[currentVideo];
-                    if (activeVideo && activeVideo.paused) {
-                        activeVideo.play().catch(() => {});
-                    }
-                }
+                startHeroVideoPlayback();
             }
         });
 
@@ -411,7 +446,7 @@
             if (videosPaused) {
                 heroVideos.forEach(video => video.pause());
             } else {
-                playCurrentVideo();
+                startHeroVideoPlayback();
             }
             
             // Update button icon
@@ -446,7 +481,7 @@
             // Reset to first video
             currentVideo = 0;
             heroVideos[0].classList.add('active');
-            playCurrentVideo();
+            startHeroVideoPlayback();
             
             // Ensure we're in playing state
             if (videosPaused) {
