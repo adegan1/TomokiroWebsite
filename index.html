@@ -265,7 +265,6 @@
                 ×
             </button>
             <h2 class="video-modal-title" id="projectVideoTitle">Fresh Coat of Fur</h2>
-            <p id="projectVideoDebugStatus" style="margin:0 0 0.75rem 0;color:#5b4a41;font-size:0.85rem;line-height:1.3;"></p>
             <div class="video-player-shell">
                 <video id="projectVideoPlayer" controls preload="metadata" playsinline>
                     <source id="projectVideoSource" src="" type="video/mp4">
@@ -547,6 +546,15 @@
                     playNextHeroVideo();
                 }
             });
+
+            // Fallback: advance near end of clip in case 'ended' doesn't fire
+            video.addEventListener('timeupdate', () => {
+                if (index !== currentVideo || videosPaused) return;
+                const dur = video.duration;
+                if (dur && isFinite(dur) && video.currentTime >= dur - 0.25) {
+                    playNextHeroVideo();
+                }
+            });
         });
 
         // About image slideshow
@@ -819,7 +827,7 @@
         let lastFocusedElement = null;
         let projectVideoCandidates = [];
         let projectVideoCandidateIndex = -1;
-        const projectVideoDebug = true;
+        const projectVideoDebug = false;
 
         function debugProjectVideo(message, details) {
             const statusText = typeof details === 'undefined'
