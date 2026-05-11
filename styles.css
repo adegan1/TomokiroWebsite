@@ -152,6 +152,14 @@ nav {
     border-radius: 0.25rem;
 }
 
+.top-name-bar-left {
+    position: absolute;
+    left: 0.75rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
 .scroll-to-top:hover {
     background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
@@ -311,6 +319,14 @@ section[id] {
 .video-pause-btn svg {
     width: 24px;
     height: 24px;
+}
+
+#toggleContentBtn {
+    top: calc(2rem + 48px + 1rem);
+}
+
+#videoRestartBtn {
+    top: calc(2rem + 96px + 2rem);
 }
 
 .hero-content {
@@ -747,6 +763,12 @@ section[id] {
 }
 
 .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border: 4px solid var(--primary-color);
+}
+
+.project-card.is-selected {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
     border: 4px solid var(--primary-color);
@@ -1201,15 +1223,53 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 900px) {
+    .page {
+        padding-top: 56px;
+        flex-direction: column;
+    }
+
     nav {
         position: sticky;
+        top: 56px;
         height: auto;
         width: 100%;
+        z-index: 950;
     }
 
     .top-name-bar {
+        transform: translateY(0);
+        position: fixed;
+        top: 0;
         left: 0;
         width: 100%;
+        z-index: 1000;
+        font-size: 1.5rem;
+    }
+
+    .top-name-bar-left {
+        display: inline-flex;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .top-name-bar .open-resume-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 0.4rem;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+        backdrop-filter: blur(8px);
+        order: 1;
+    }
+
+    .top-name-bar .open-resume-btn::before {
+        display: none;
+    }
+
+    .top-name-bar .open-resume-btn svg {
+        width: 18px;
+        height: 18px;
     }
 
     .nav-container {
@@ -1219,7 +1279,13 @@ footer {
     .nav-links {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 1.25rem;
+        justify-content: center;
+        gap: 0.5rem 1.25rem;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        text-align: center;
     }
 
     .content {
@@ -1227,15 +1293,83 @@ footer {
         width: 100%;
     }
 
-    .page {
-        flex-direction: column;
+    .hero {
+        padding: 5rem 1.5rem;
     }
 
+    /* Shrink folder tabs so they don't overflow */
+    #about::before {
+        left: 2rem;
+        width: 160px;
+        font-size: 2.5rem;
+        height: 68px;
+        top: -64px;
+    }
+
+    #portfolio::before {
+        width: 220px;
+        font-size: 2.5rem;
+        height: 68px;
+        top: -64px;
+    }
+
+    #contact::before {
+        right: 2rem;
+        width: 160px;
+        font-size: 2.5rem;
+        height: 68px;
+        top: -64px;
+    }
 }
 
 @media (max-width: 768px) {
+    .top-name-bar {
+        height: 50px;
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+
+    .page {
+        padding-top: 50px;
+    }
+
+    nav {
+        top: 50px;
+    }
+
+    .scroll-to-top {
+        right: 0.75rem;
+        width: 34px;
+        height: 34px;
+    }
+
+    .top-name-bar .open-resume-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .nav-links a {
+        font-size: 1.25rem;
+    }
+
     .tagline {
         font-size: 1.25rem;
+    }
+
+    .hero {
+        padding: 4rem 1.25rem;
+    }
+
+    .name-tag-image {
+        width: min(75vw, 400px);
+    }
+
+    .page-header {
+        padding: 2.5rem 0;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
     }
 
     .about-grid,
@@ -1243,8 +1377,61 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .about-text {
+        order: 1;
+    }
+
+    .about-wide-paragraph {
+        order: 2;
+    }
+
+    .about-image {
+        order: 3;
+    }
+
+    .about-text-lower {
+        order: 4;
+    }
+
+    .about-content {
+        padding: 2.5rem 0;
+    }
+
+    .about-image {
+        align-items: center;
+    }
+
+    .about-slideshow {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    /* Reposition resume tooltip so it doesn't clip on mobile */
+    .open-resume-btn::before {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .about-text h2 {
+        font-size: 1.5rem;
+    }
+
     .portfolio-grid {
         grid-template-columns: 1fr;
+    }
+
+    .portfolio-content {
+        padding: 2.5rem 0;
+    }
+
+    .contact-content {
+        padding: 2.5rem 0;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
     }
 
     .video-modal-dialog,
@@ -1266,6 +1453,137 @@ footer {
     .project-part-item {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .project-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-name-bar {
+        height: 46px;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+    }
+
+    .top-name-bar-left {
+        left: 0.45rem;
+    }
+
+    .page {
+        padding-top: 46px;
+    }
+
+    nav {
+        top: 46px;
+    }
+
+    .top-name-bar .open-resume-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .top-name-bar .open-resume-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .nav-container {
+        padding: 0.6rem 1rem;
+    }
+
+    .nav-links {
+        gap: 0.35rem 0.85rem;
+        justify-content: center;
+    }
+
+    .nav-links a {
+        font-size: 1.05rem;
+    }
+
+    .hero {
+        padding: 3rem 1rem;
+        min-height: 85vh;
+    }
+
+    .name-tag-image {
+        width: min(88vw, 300px);
+    }
+
+    .tagline {
+        font-size: 0.95rem;
+    }
+
+    /* Scale down and reposition hero overlay buttons */
+    .video-pause-btn {
+        width: 40px;
+        height: 40px;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    #toggleContentBtn {
+        top: calc(0.75rem + 40px + 0.6rem);
+    }
+
+    #videoRestartBtn {
+        top: calc(0.75rem + 80px + 1.2rem);
+    }
+
+    /* Further shrink folder tabs */
+    #about::before,
+    #portfolio::before,
+    #contact::before {
+        font-size: 1.85rem;
+        height: 54px;
+        top: -50px;
+        width: 128px;
+    }
+
+    #about::before {
+        left: 0.75rem;
+    }
+
+    #contact::before {
+        right: 0.75rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .about-text h2 {
+        font-size: 1.3rem;
+    }
+
+    .contact-info h2,
+    .contact-form h2 {
+        font-size: 1.4rem;
+    }
+
+    .contact-grid {
+        gap: 2rem;
+    }
+
+    .skills {
+        padding: 0 0 3.5rem 0;
+    }
+
+    .skills h2 {
+        font-size: 1.6rem;
+    }
+
+    .portfolio-content {
+        padding: 2rem 0;
+    }
+
+    .contact-content {
+        padding: 2rem 0;
     }
 }
 

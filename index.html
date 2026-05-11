@@ -22,6 +22,7 @@
         </nav>
 
         <div class="top-name-bar" id="topNameBar">
+            <div class="top-name-bar-left" id="topBarResumeMount"></div>
             <span>・　Andrew Degan　・</span>
             <a href="#home" class="scroll-to-top" aria-label="Scroll to top">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -47,13 +48,13 @@
                         <rect x="14" y="4" width="4" height="16"></rect>
                     </svg>
                 </button>
-                <button class="video-pause-btn" id="toggleContentBtn" type="button" aria-label="Hide hero text" aria-pressed="false" style="top: calc(2rem + 48px + 1rem);">
+                <button class="video-pause-btn" id="toggleContentBtn" type="button" aria-label="Hide hero text" aria-pressed="false">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </button>
-                <button class="video-pause-btn" id="videoRestartBtn" type="button" aria-label="Restart video playlist" style="top: calc(2rem + 96px + 2rem);">
+                <button class="video-pause-btn" id="videoRestartBtn" type="button" aria-label="Restart video playlist">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
                     </svg>
@@ -106,9 +107,10 @@
                                 </div>
                                 <button class="open-resume-btn" id="openResumeBtn" type="button" title="Open Resume in new tab" aria-label="Open resume in new tab">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path>
+                                        <polyline points="14 2 14 7 19 7"></polyline>
+                                        <line x1="9" y1="12" x2="15" y2="12"></line>
+                                        <line x1="9" y1="16" x2="15" y2="16"></line>
                                     </svg>
                                 </button>
                             </div>
@@ -568,14 +570,50 @@
         }
 
         if (!prefersReducedMotion) {
-            setInterval(nextSlide, 12000);
+            setInterval(nextSlide, 10000);
         }
 
         // Open resume button
         const openResumeBtn = document.getElementById('openResumeBtn');
+        const topBarResumeMount = document.getElementById('topBarResumeMount');
+        const originalResumeBtnParent = openResumeBtn ? openResumeBtn.parentElement : null;
+        const originalResumeBtnNextSibling = openResumeBtn ? openResumeBtn.nextElementSibling : null;
+        const mobileTopBarQuery = window.matchMedia('(max-width: 900px)');
+
         openResumeBtn.addEventListener('click', () => {
             window.open('resources/resume.pdf', '_blank');
         });
+
+        function syncResumeButtonPositionForViewport() {
+            if (!openResumeBtn || !topBarResumeMount || !originalResumeBtnParent) {
+                return;
+            }
+
+            if (mobileTopBarQuery.matches) {
+                if (!topBarResumeMount.contains(openResumeBtn)) {
+                    topBarResumeMount.appendChild(openResumeBtn);
+                }
+                openResumeBtn.classList.add('is-in-mobile-topbar');
+                return;
+            }
+
+            if (topBarResumeMount.contains(openResumeBtn)) {
+                if (originalResumeBtnNextSibling && originalResumeBtnNextSibling.parentElement === originalResumeBtnParent) {
+                    originalResumeBtnParent.insertBefore(openResumeBtn, originalResumeBtnNextSibling);
+                } else {
+                    originalResumeBtnParent.appendChild(openResumeBtn);
+                }
+            }
+            openResumeBtn.classList.remove('is-in-mobile-topbar');
+        }
+
+        if (typeof mobileTopBarQuery.addEventListener === 'function') {
+            mobileTopBarQuery.addEventListener('change', syncResumeButtonPositionForViewport);
+        } else if (typeof mobileTopBarQuery.addListener === 'function') {
+            mobileTopBarQuery.addListener(syncResumeButtonPositionForViewport);
+        }
+
+        syncResumeButtonPositionForViewport();
 
         // Contact form email sending (FormSubmit AJAX)
         const contactForm = document.getElementById('contactForm');
@@ -1156,40 +1194,106 @@
             }
         });
 
-        // Project image cycling on hover
+        // Project image cycling (desktop hover + mobile tap/select)
         const projectCards = document.querySelectorAll('.project-card');
-        
+        const isTouchLikeDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+        let selectedProjectCard = null;
+
         projectCards.forEach(card => {
             const images = card.querySelectorAll('.project-img');
             let cycleInterval = null;
             let currentImageIndex = 0;
 
-            card.addEventListener('mouseenter', () => {
-                if (prefersReducedMotion || images.length <= 1) {
+            const resetToFirstImage = () => {
+                if (images.length === 0) {
                     return;
                 }
-                if (cycleInterval) {
+                images[currentImageIndex].classList.remove('active');
+                currentImageIndex = 0;
+                images[currentImageIndex].classList.add('active');
+            };
+
+            const startImageCycle = () => {
+                if (prefersReducedMotion || images.length <= 1 || cycleInterval) {
                     return;
                 }
-                // Start cycling through images
+
                 cycleInterval = setInterval(() => {
                     images[currentImageIndex].classList.remove('active');
                     currentImageIndex = (currentImageIndex + 1) % images.length;
                     images[currentImageIndex].classList.add('active');
-                }, 1000); // Change image every 1 second
+                }, 1000);
+            };
+
+            const stopImageCycle = () => {
+                clearInterval(cycleInterval);
+                cycleInterval = null;
+                resetToFirstImage();
+            };
+
+            const deselectCard = () => {
+                card.classList.remove('is-selected');
+                stopImageCycle();
+                if (selectedProjectCard === card) {
+                    selectedProjectCard = null;
+                }
+            };
+
+            const selectCard = () => {
+                if (selectedProjectCard && selectedProjectCard !== card && typeof selectedProjectCard.__deselectProjectCard === 'function') {
+                    selectedProjectCard.__deselectProjectCard();
+                }
+                selectedProjectCard = card;
+                card.classList.add('is-selected');
+                startImageCycle();
+            };
+
+            card.__deselectProjectCard = deselectCard;
+
+            card.addEventListener('mouseenter', () => {
+                if (isTouchLikeDevice) {
+                    return;
+                }
+                selectCard();
             });
 
             card.addEventListener('mouseleave', () => {
-                if (images.length === 0) {
+                if (isTouchLikeDevice) {
                     return;
                 }
-                // Stop cycling and return to first image
-                clearInterval(cycleInterval);
-                cycleInterval = null;
-                images[currentImageIndex].classList.remove('active');
-                currentImageIndex = 0;
-                images[currentImageIndex].classList.add('active');
+                deselectCard();
             });
+
+            card.addEventListener('click', (event) => {
+                if (!isTouchLikeDevice) {
+                    return;
+                }
+
+                if (event.target.closest('a, button, input, textarea, select, label')) {
+                    return;
+                }
+
+                if (selectedProjectCard === card) {
+                    deselectCard();
+                    return;
+                }
+
+                selectCard();
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!isTouchLikeDevice) {
+                return;
+            }
+
+            if (event.target.closest('.project-card')) {
+                return;
+            }
+
+            if (selectedProjectCard && typeof selectedProjectCard.__deselectProjectCard === 'function') {
+                selectedProjectCard.__deselectProjectCard();
+            }
         });
 
         // Toggle additional projects
