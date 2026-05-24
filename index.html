@@ -1351,9 +1351,17 @@
             const btnText = toggleBtn.querySelector('.btn-text');
             btnText.textContent = isExpanded ? 'Show Fewer Projects' : 'Show More Projects';
 
-            // Show/hide second button and batch based on first batch expansion
-            toggleBtn2.style.display = isExpanded ? '' : 'none';
-            additionalProjects2.style.display = isExpanded ? '' : 'none';
+            const isMobilePortfolioView = window.matchMedia('(max-width: 768px)').matches;
+            const hasSecondBatch = additionalProjects2.children.length > 0;
+
+            // Only show second controls on mobile where batch 2 exists.
+            if (isExpanded && isMobilePortfolioView && hasSecondBatch) {
+                toggleBtn2.style.display = '';
+                additionalProjects2.style.display = '';
+            } else {
+                toggleBtn2.style.display = 'none';
+                additionalProjects2.style.display = 'none';
+            }
 
             // If collapsing the first batch, also collapse the second
             if (!isExpanded && additionalProjects2.classList.contains('expanded')) {
